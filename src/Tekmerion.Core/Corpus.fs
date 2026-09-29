@@ -18,7 +18,9 @@ type IngestInput =
       /// Frontier records; kept only when their declared origin document is
       /// in `Included` (scope rule `origin-in-scope`).
       FrontierCandidates: SourceFile list
-      RepositoryFiles: Set<string> }
+      RepositoryFiles: Set<string>
+      /// Source commit, when known (e.g. from configuration or CI).
+      Revision: string option }
 
 type IngestedArtifact =
     { Reading: ArtifactReading
@@ -47,8 +49,8 @@ module Corpus =
           Message = message
           Remedy = remedy }
 
-    let private readWithFrontier (repository: RepositoryId) (population: Population) (file: SourceFile) =
-        let reading = Reading.read repository file.Path file.Text
+    let private readWithFrontier (repository: RepositoryId) (revision: string option) (population: Population) (file: SourceFile) =
+        let reading = Reading.readAt repository revision file.Path file.Text
 
         { Reading = { reading with References = reading.References @ Frontier.references reading.Artifact }
           Population = population }
@@ -222,12 +224,12 @@ module Corpus =
     let private byKey (artifact: Artifact) = ArtifactKey.url artifact.Key, RepoPath.value artifact.Location.Path
 
     let ingest (input: IngestInput) : Corpus =
-        let authored = input.Included |> List.map (readWithFrontier input.Repository AuthoredResearch)
+        let authored = input.Included |> List.map (readWithFrontier input.Repository input.Revision AuthoredResearch)
         let includedPaths = input.Included |> List.map (fun f -> RepoPath.value f.Path) |> set
 
         let frontier =
             input.FrontierCandidates
-            |> List.map (readWithFrontier input.Repository MachineGenerated)
+            |> List.map (readWithFrontier input.Repository input.Revision MachineGenerated)
             |> List.filter (fun candidate ->
                 candidate.Reading.References
                 |> List.exists (fun r ->

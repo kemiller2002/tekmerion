@@ -1,0 +1,314 @@
+{
+  "schemaVersion": "1.1",
+  "extractOf": "dist/data/research-catalog.json @ 7ef65a35fced016a663bad6e3d74918c03eb208f (records[].url and records[].sourcePath only, for records whose sourcePath is in this fixture)",
+  "records": [
+    {
+      "url": "/Visual-Engineering/research/composition-genome-v1/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-genome-v1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/spec-001-composition-science-knowledge-graph-specification/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-science-knowledge-graph-specification-v1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/ont-001-composition-science-ontology/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-science-ontology-v1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/gov-001-composition-science-project-constitution/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-science-project-constitution-v1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/composition-science-repository-governance-specification/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-science-repository-governance-specification-v1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/composition-science-research-library/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-science-research-library-v0-1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/composition-science-research-library-v0-2-2/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-science-research-library-v0-2-2.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/composition-science-research-library-v0-4/",
+      "sourcePath": "content/projects/composition-science/canonical/composition-science-research-library-v0-4.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/ex-comp-011-context-reliability-reversal/",
+      "sourcePath": "content/projects/composition-science/experiment-report/ex-comp-011-context-reliability-reversal.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/ex-comp-012-first-glance-versus-verified-understanding/",
+      "sourcePath": "content/projects/composition-science/experiment-report/ex-comp-012-first-glance-vs-verification.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/composition-science-research/",
+      "sourcePath": "content/projects/composition-science/phase-report/composition-science-phase-2-visual-hierarchy-and-wayfinding.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/composition-science/",
+      "sourcePath": "content/projects/composition-science/phase-report/composition-science-phase-3-evidence-review-attention-wayfinding.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rp-comp-005-visual-scene-construction-predictive-processing-and-active-perception/",
+      "sourcePath": "content/projects/composition-science/research-execution-package/rp-comp-005-visual-scene-construction.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/df-comp-002-perceptual-evidence-path-review/",
+      "sourcePath": "content/projects/composition-science/research-framework/df-comp-002-perceptual-evidence-path-review.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/architecture-as-a-foundation-for-composition-science/",
+      "sourcePath": "content/projects/composition-science/research-note/architecture-as-a-foundation-for-composition-science.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/composition-science-architecture-research-human-scale-and-proportion/",
+      "sourcePath": "content/projects/composition-science/research-note/composition-science-architecture-human-scale-and-proportion-research.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/visual-density-crowding-and-perceptual-separation/",
+      "sourcePath": "content/projects/composition-science/research-note/composition-science-visual-density-crowding-and-perceptual-separation.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/intuitive-is-just-familiar/",
+      "sourcePath": "content/projects/composition-science/research-note/intuitive-is-just-familiar-predictive-fit-rep-v2.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rpt-gn100-001-autonomous-research-report-perception-as-the-foundation-of-composition/",
+      "sourcePath": "content/projects/composition-science/research-report/gn-100-perception-autonomous-research-report-v1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/intuitive-is-just-familiar-research-report/",
+      "sourcePath": "content/projects/composition-science/research-report/intuitive-is-just-familiar-research-report.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/title/",
+      "sourcePath": "content/projects/composition-science/template/composition-science-markdown-template-v1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/th-comp-005-active-inference-composition-theory/",
+      "sourcePath": "content/projects/composition-science/theory-registry/th-comp-005-active-inference-composition.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-05660dca-calibrate-construct-and-measurement-validity-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-05660DCA.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-07fb3ffd-independent-validation-of-the-central-claim-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-07FB3FFD.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-15c3c449-map-boundary-conditions-and-failure-regimes-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-15C3C449.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-2260cf6f-independent-validation-of-the-central-claim-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-2260CF6F.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-245da335-map-boundary-conditions-and-failure-regimes-composition-science-project-constitution/",
+      "sourcePath": "research/frontier/records/RFR-245DA335.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-2fd4f1ef-calibrate-construct-and-measurement-validity-composition-science-project-constitution/",
+      "sourcePath": "research/frontier/records/RFR-2FD4F1EF.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-30986b41-calibrate-construct-and-measurement-validity-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-30986B41.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-3485da8e-map-boundary-conditions-and-failure-regimes-visual-scene-construction-predictive-processing-and-active-perception/",
+      "sourcePath": "research/frontier/records/RFR-3485DA8E.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-38c1e0f5-create-a-shared-benchmark-and-decision-threshold-composition-science-project-constitution/",
+      "sourcePath": "research/frontier/records/RFR-38C1E0F5.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-426d041a-map-boundary-conditions-and-failure-regimes-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-426D041A.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-4536c664-create-a-shared-benchmark-and-decision-threshold-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-4536C664.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-45a66a14-calibrate-construct-and-measurement-validity-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-45A66A14.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-4f0eeeac-test-cross-population-and-cross-context-transfer-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-4F0EEEAC.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-544acda1-calibrate-construct-and-measurement-validity-visual-scene-construction-predictive-processing-and-active-perception/",
+      "sourcePath": "research/frontier/records/RFR-544ACDA1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-6503e3d5-test-cross-population-and-cross-context-transfer-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-6503E3D5.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-65658bc9-create-a-shared-benchmark-and-decision-threshold-purpose/",
+      "sourcePath": "research/frontier/records/RFR-65658BC9.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-65a50639-test-cross-population-and-cross-context-transfer-visual-scene-construction-predictive-processing-and-active-perception/",
+      "sourcePath": "research/frontier/records/RFR-65A50639.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-700da85d-independent-validation-of-the-central-claim-mission/",
+      "sourcePath": "research/frontier/records/RFR-700DA85D.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-70ac5777-independent-validation-of-the-central-claim-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-70AC5777.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-7ce17a95-calibrate-construct-and-measurement-validity-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-7CE17A95.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-7ebfd0c1-create-a-shared-benchmark-and-decision-threshold-purpose/",
+      "sourcePath": "research/frontier/records/RFR-7EBFD0C1.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-8108d35a-test-cross-population-and-cross-context-transfer-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-8108D35A.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-8b508d5c-independent-validation-of-the-central-claim-composition-science-project-constitution/",
+      "sourcePath": "research/frontier/records/RFR-8B508D5C.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-8d71f35b-test-cross-population-and-cross-context-transfer-composition-science-project-constitution/",
+      "sourcePath": "research/frontier/records/RFR-8D71F35B.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-8e669fd3-map-boundary-conditions-and-failure-regimes-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-8E669FD3.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-91cce084-calibrate-construct-and-measurement-validity-purpose/",
+      "sourcePath": "research/frontier/records/RFR-91CCE084.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-99e63f99-create-a-shared-benchmark-and-decision-threshold-purpose/",
+      "sourcePath": "research/frontier/records/RFR-99E63F99.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a1760792-create-a-shared-benchmark-and-decision-threshold-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-A1760792.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a2a5e6ba-map-boundary-conditions-and-failure-regimes-purpose/",
+      "sourcePath": "research/frontier/records/RFR-A2A5E6BA.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a3f3879c-create-a-shared-benchmark-and-decision-threshold-mission/",
+      "sourcePath": "research/frontier/records/RFR-A3F3879C.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a4b00e23-test-cross-population-and-cross-context-transfer-mission/",
+      "sourcePath": "research/frontier/records/RFR-A4B00E23.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a63efe0a-independent-validation-of-the-central-claim-purpose/",
+      "sourcePath": "research/frontier/records/RFR-A63EFE0A.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a8f2407c-independent-validation-of-the-central-claim-purpose/",
+      "sourcePath": "research/frontier/records/RFR-A8F2407C.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a90aaa69-map-boundary-conditions-and-failure-regimes-purpose/",
+      "sourcePath": "research/frontier/records/RFR-A90AAA69.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-a9dc3345-calibrate-construct-and-measurement-validity-purpose/",
+      "sourcePath": "research/frontier/records/RFR-A9DC3345.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-abd5eedc-calibrate-construct-and-measurement-validity-mission/",
+      "sourcePath": "research/frontier/records/RFR-ABD5EEDC.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-ae256f6f-test-cross-population-and-cross-context-transfer-purpose/",
+      "sourcePath": "research/frontier/records/RFR-AE256F6F.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-b6861771-test-cross-population-and-cross-context-transfer-purpose/",
+      "sourcePath": "research/frontier/records/RFR-B6861771.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-bc197c18-test-cross-population-and-cross-context-transfer-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-BC197C18.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-ca818732-map-boundary-conditions-and-failure-regimes-purpose/",
+      "sourcePath": "research/frontier/records/RFR-CA818732.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-cbb3f73e-calibrate-construct-and-measurement-validity-purpose/",
+      "sourcePath": "research/frontier/records/RFR-CBB3F73E.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-d08fe018-create-a-shared-benchmark-and-decision-threshold-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-D08FE018.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-d2bae4a7-map-boundary-conditions-and-failure-regimes-purpose/",
+      "sourcePath": "research/frontier/records/RFR-D2BAE4A7.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-d844b3d9-independent-validation-of-the-central-claim-purpose/",
+      "sourcePath": "research/frontier/records/RFR-D844B3D9.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-deb5927a-create-a-shared-benchmark-and-decision-threshold-visual-scene-construction-predictive-processing-and-active-perception/",
+      "sourcePath": "research/frontier/records/RFR-DEB5927A.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-e7f9799c-map-boundary-conditions-and-failure-regimes-mission/",
+      "sourcePath": "research/frontier/records/RFR-E7F9799C.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-ef22adeb-test-cross-population-and-cross-context-transfer-purpose/",
+      "sourcePath": "research/frontier/records/RFR-EF22ADEB.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-f252ce5f-independent-validation-of-the-central-claim-visual-scene-construction-predictive-processing-and-active-perception/",
+      "sourcePath": "research/frontier/records/RFR-F252CE5F.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-f478d366-independent-validation-of-the-central-claim-purpose/",
+      "sourcePath": "research/frontier/records/RFR-F478D366.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-f4d19bfc-map-boundary-conditions-and-failure-regimes-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-F4D19BFC.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-f9bd9cf2-calibrate-construct-and-measurement-validity-purpose/",
+      "sourcePath": "research/frontier/records/RFR-F9BD9CF2.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-faf5c47d-independent-validation-of-the-central-claim-composition-science-research-library/",
+      "sourcePath": "research/frontier/records/RFR-FAF5C47D.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-fdab353f-test-cross-population-and-cross-context-transfer-purpose/",
+      "sourcePath": "research/frontier/records/RFR-FDAB353F.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-ff03b1e8-create-a-shared-benchmark-and-decision-threshold-purpose/",
+      "sourcePath": "research/frontier/records/RFR-FF03B1E8.md"
+    },
+    {
+      "url": "/Visual-Engineering/research/rfr-ffebda32-create-a-shared-benchmark-and-decision-threshold-executive-summary/",
+      "sourcePath": "research/frontier/records/RFR-FFEBDA32.md"
+    }
+  ]
+}

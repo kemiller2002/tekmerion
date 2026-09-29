@@ -16,7 +16,8 @@ module AdversarialTests =
             { Repository = repository
               Included = files
               FrontierCandidates = []
-              RepositoryFiles = files |> List.map (fun f -> RepoPath.value f.Path) |> set }
+              RepositoryFiles = files |> List.map (fun f -> RepoPath.value f.Path) |> set
+              Revision = None }
 
     let codes (corpus: Corpus) = corpus.Findings |> List.map (fun f -> Policy.code f.Code)
 
@@ -76,7 +77,8 @@ module AdversarialTests =
                 { Repository = repository
                   Included = [ source "content/projects/p/research-note/x.md" "---\nid: X-1\nrelated_documents:\n  - content/concepts/composition-index.md\n---\n" ]
                   FrontierCandidates = []
-                  RepositoryFiles = set [ "content/projects/p/research-note/x.md"; "content/concepts/composition-index.md" ] }
+                  RepositoryFiles = set [ "content/projects/p/research-note/x.md"; "content/concepts/composition-index.md" ]
+                  Revision = None }
 
         Assert.Contains("out-of-scope-reference", codes corpus)
         Assert.DoesNotContain("dangling-reference", codes corpus)
@@ -94,7 +96,8 @@ module AdversarialTests =
                   FrontierCandidates =
                     [ source "research/frontier/records/RFR-IN000001.md" "---\nid: RFR-IN000001\ndocument_type: research_frontier_record\n---\n## Evidence trace\n\n- Origin document: [x](../../../content/projects/p/research-note/x.md)\n"
                       source "research/frontier/records/RFR-OUT00001.md" "---\nid: RFR-OUT00001\ndocument_type: research_frontier_record\n---\n## Evidence trace\n\n- Origin document: [y](../../../content/projects/q/y.md)\n" ]
-                  RepositoryFiles = set [] }
+                  RepositoryFiles = set []
+                  Revision = None }
 
         Assert.Equal<string list>(
             [ "RFR-IN000001"; "X-1" ],

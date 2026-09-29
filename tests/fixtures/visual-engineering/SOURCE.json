@@ -9,5 +9,6 @@
     "content/archive/duplicates/composition-science/*.md (1 document, no front matter)",
     "research/frontier/records/*.md whose evidence trace declares an origin document in the two sets above (55 records)"
   ],
-  "repositoryFiles": "repository-files.txt is `git ls-files` at the pinned commit, so references to files outside the slice resolve as out-of-scope rather than dangling"
+  "repositoryFiles": "repository-files.txt is `git ls-files` at the pinned commit, so references to files outside the slice resolve as out-of-scope rather than dangling",
+  "legacyCatalog": "legacy-catalog.json is an extract (url, sourcePath) of the previously published dist/data/research-catalog.json at the pinned commit: the evidence for which URLs must keep working (TEK-IDY-006)."
 }

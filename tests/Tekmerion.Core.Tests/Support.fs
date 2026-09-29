@@ -37,6 +37,7 @@ module Support =
         { ConfigPath = fixtureConfig
           Root = None
           Out = out
+          Forma = None
           Json = true }
 
     /// The golden corpus, ingested once through the real host path.

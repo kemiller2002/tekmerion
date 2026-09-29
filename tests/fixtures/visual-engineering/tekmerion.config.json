@@ -9,5 +9,12 @@
     "records": "research/frontier/records/*.md",
     "scope": "origin-in-scope"
   },
-  "repositoryFiles": "repository-files.txt"
+  "repositoryFiles": "repository-files.txt",
+  "revision": "7ef65a35fced016a663bad6e3d74918c03eb208f",
+  "site": {
+    "title": "Visual Engineering Research",
+    "sourceUrl": "https://github.com/kemiller2002/visual-engineering/blob/{revision}/{path}#L{line}",
+    "legacyCatalog": "legacy-catalog.json",
+    "legacyBasePath": "/Visual-Engineering/"
+  }
 }

@@ -12,12 +12,15 @@ module Program =
 
 Usage:
   tekmerion validate --config PATH [--root DIR] [--json]
-  tekmerion ingest   --config PATH [--root DIR] --out DIR [--json]
+  tekmerion ingest   --config PATH [--root DIR] --out DIR [--forma CSS] [--json]
   tekmerion --version
 
   validate  discover, parse, type, validate and resolve; write nothing
-  ingest    validate, then write versioned machine contracts under DIR/data/v1
-            through staging and atomic promotion
+  ingest    validate, then write the static research site and versioned
+            machine contracts (DIR/data/v1) through staging and promotion.
+            --forma names Forma's all.css from a pinned
+            @echelon-foundry/design-system release; without it pages are
+            unstyled semantic HTML
 
 Exit codes: 0 success, 1 publication blocked, 2 invalid arguments,
 6 environment failure. --json writes one JSON document to stdout."""
@@ -29,6 +32,7 @@ Exit codes: 0 success, 1 publication blocked, 2 invalid arguments,
         | "--root" :: value :: rest -> parseOptions rest { options with Root = Some value }
         | "--out" :: value :: rest -> parseOptions rest { options with Out = Some value }
         | "--json" :: rest -> parseOptions rest { options with Json = true }
+        | "--forma" :: value :: rest -> parseOptions rest { options with Forma = Some value }
         | unknown :: _ -> Error $"unknown argument '{unknown}'"
 
     let private summary (command: string) (result: CommandResult) =
@@ -107,7 +111,7 @@ Exit codes: 0 success, 1 publication blocked, 2 invalid arguments,
         // Blocking persistence: a short-lived CLI must not exit before its
         // fault events are written.
         let aegis = { Aegis.configure "Tekmerion" (Some Version.Tekmerion) [ Sinks.standardError ] with Persistence = PersistenceMode.Blocking }
-        let defaults = { ConfigPath = "tekmerion.config.json"; Root = None; Out = None; Json = false }
+        let defaults = { ConfigPath = "tekmerion.config.json"; Root = None; Out = None; Forma = None; Json = false }
 
         match List.ofArray argv with
         | [ "--version" ] ->
