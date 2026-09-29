@@ -25,6 +25,7 @@ module ValidationTests =
           MissingDeclaredType
           NoFrontMatter
           UnknownKey "llm_ingest"
+          OutOfScopeReference "content/concepts/x.md"
           Orphan ]
 
     [<Fact>]

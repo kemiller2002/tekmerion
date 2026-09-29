@@ -1,7 +1,7 @@
 ---
 id: REQ-TEK
 title: Tekmerion Canonical Requirements
-version: 1.0.0
+version: 1.1.0
 status: accepted-baseline
 created: 2026-09-29
 updated: 2026-09-29
@@ -217,7 +217,12 @@ therefore distinguishes three things throughout:
   the research itself. The observed canonical set is: `related_documents`
   (untyped), `source_rep`, `supersedes`, `superseded_by`, `originates`,
   `prerequisite`, and explicit typed id lists (`evidenceIds`, `hypothesisIds`,
-  `theoryIds`) when present. *(v0.2 change summary, C.1, §29 Q2)*
+  `theoryIds`) when present. Amended in 1.1.0 from the slice corpus: the
+  explicit id-list keys `related_artifacts` and `related_theory` are untyped
+  related-document links, and `tests` is a typed link; `originates` is
+  declared by a frontier record as its evidence-trace *origin document* and
+  navigated in the other direction as a derived backlink. *(v0.2 change
+  summary, C.1, §29 Q2, GH-17 corpus survey)*
 - **TEK-REL-002** `slice` — Derived relationships (backlinks, same-project,
   frontier-of, supersession chains) are a distinct type from canonical
   relationships in code, in every machine contract (`derived: true` plus the
@@ -662,3 +667,4 @@ else.
 | Version | Date | Change | Work item |
 | --- | --- | --- | --- |
 | 1.0.0 | 2026-09-29 | Canonical baseline reconciling REQ-RP-VNEXT 0.2.0, the original draft, #11 and doc 18 | GH-13 |
+| 1.1.0 | 2026-09-29 | TEK-REL-001 amended with the explicit link keys observed in the slice corpus (`related_artifacts`, `related_theory`, `tests`) and the declared direction of frontier origin links; DF-TEK-2026-0002 | GH-17 |

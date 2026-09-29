@@ -127,11 +127,17 @@ type ReferenceValue =
     | IdReference of string
     /// Prose naming a document. Not a link, never warned about.
     | ProseTitle of string
+    /// An absolute http(s) URL: a real link, but not to a research artifact.
+    | ExternalUrl of string
     | Unparsed of string
 
 /// Outcome of resolving one reference against the artifact set.
 type Resolution =
     | Resolves of ArtifactKey
+    /// Names a file that exists in the repository but is outside the
+    /// published scope. Not dangling: the target exists, it is just not
+    /// projected here.
+    | OutOfScope of ReferenceValue * RepoPath
     /// Legal research state; a visible warning, never dropped (TEK-REL-004).
     | Dangling of ReferenceValue
     | NotALink of text: string
@@ -161,6 +167,10 @@ type Artifact =
       Title: Knowable<string>
       Project: Knowable<string>
       Status: Knowable<StatusReading>
+      /// `date`, `created` and `updated` are distinct keys with distinct
+      /// meanings in the corpus; each is kept verbatim and none is inferred
+      /// from another (a template's `YYYY-MM-DD` stays `YYYY-MM-DD`).
+      Date: Knowable<string>
       Created: Knowable<string>
       Updated: Knowable<string>
       Summary: Knowable<string>

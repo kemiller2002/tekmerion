@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Pinned snapshot of the first vertical slice corpus (GH-17, docs/vnext/13-vertical-slice.md). Files are byte copies; canonical research is never modified here (TEK-TST-002).",
+  "repository": "kemiller2002/visual-engineering",
+  "commit": "7ef65a35fced016a663bad6e3d74918c03eb208f",
+  "committedAt": "2026-09-29T08:57:59+02:00",
+  "selection": [
+    "content/projects/composition-science/**/*.md (22 documents)",
+    "content/archive/duplicates/composition-science/*.md (1 document, no front matter)",
+    "research/frontier/records/*.md whose evidence trace declares an origin document in the two sets above (55 records)"
+  ],
+  "repositoryFiles": "repository-files.txt is `git ls-files` at the pinned commit, so references to files outside the slice resolve as out-of-scope rather than dangling"
+}
