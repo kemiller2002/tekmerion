@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "research-publisher",
-  "nextSeq": 4,
+  "nextSeq": 13,
   "items": [
     {
       "id": "WI-0001",
@@ -76,6 +76,134 @@
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/research-publisher/issues/11"
+    },
+    {
+      "id": "WI-0004",
+      "title": "Praxis gap G1: native releases >=3.3.0 ship no ros-fs assets, so the repo launcher 404s after upgrade; blocks moving past ROS 3.1.4 (see docs/echelon/foundations.md)",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:19.921Z",
+      "updatedAt": "2026-09-29T09:38:19.921Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0005",
+      "title": "Praxis gap G2: praxis upgrade 3.5.0 seeds .echelon/toolchain.json with praxis 3.4.0 while recording 3.5.0",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:20.230Z",
+      "updatedAt": "2026-09-29T09:38:20.230Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0006",
+      "title": "Praxis gap G4: ROS CLI older than installation plans a silent downgrade and doctor recommends it; add a downgrade guard",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:20.513Z",
+      "updatedAt": "2026-09-29T09:38:20.513Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0007",
+      "title": "Limen gap G7: tool-owned limen-verify.yml runs unpinned npx verify --strict, breaking consumer CI on every release (doc 18 section 1 forbids floating versions)",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:20.808Z",
+      "updatedAt": "2026-09-29T09:38:20.808Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0008",
+      "title": "Communication Engineering gap G8: 1.0.0 not on npm and installed commit not recorded in manifest",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:21.085Z",
+      "updatedAt": "2026-09-29T09:38:21.085Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0009",
+      "title": "Folio gap G9 / Forma gap G10: no pinned published release (Folio) / 0.3.0 unpublished (Forma)",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:21.376Z",
+      "updatedAt": "2026-09-29T09:38:21.376Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0010",
+      "title": "Tekmerion: ros.json rosVersion still 3.0.3 (legacy fallback, ignored by the 3.1.4 launcher); align only through a supported lifecycle path or owner decision",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:21.648Z",
+      "updatedAt": "2026-09-29T09:38:21.648Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0012",
+      "title": "Tekmerion: adopt EchelonFoundry.Aegis.Core 1.0.0 at F# host boundaries (doc 18 section 2); planned with the GH-17 ingestion host",
+      "description": null,
+      "tags": [
+        "echelon,gh-16"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T09:38:21.918Z",
+      "updatedAt": "2026-09-29T09:38:21.918Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
     }
   ]
 }
