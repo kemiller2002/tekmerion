@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "claude",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-09-29T09:59:18.000Z",
+  "updatedAt": "2026-09-29T10:17:06.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -167,6 +167,27 @@
       "telemetryExecutionIds": [
         "EXE-20260929T095918832Z-c11e59b6"
       ]
+    },
+    {
+      "id": "GH-19",
+      "type": "feature",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Tekmerion.Cli/Commands.fs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/Tekmerion.Core.Tests/OperationalTests.fs"
+        }
+      ],
+      "updatedAt": "2026-09-29T10:17:06.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20260929T101405382Z-66cc3555"
+      ],
+      "completedAt": "2026-09-29T10:17:06.000Z"
     }
   ]
 }

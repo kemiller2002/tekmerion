@@ -1,0 +1,59 @@
+name: Tekmerion slice
+
+# Operational proof of the first vertical slice (GH-19): the real corpus
+# snapshot ingests, publishes deterministically, and navigates in a browser
+# with JavaScript disabled. Verification only; nothing is deployed.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  slice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - run: npm ci
+      - run: dotnet build src/Tekmerion.Cli -c Release --nologo
+
+      - name: Ingest the slice twice
+        run: |
+          for n in 1 2; do
+            dotnet src/Tekmerion.Cli/bin/Release/net8.0/tekmerion.dll ingest \
+              --config tests/fixtures/visual-engineering/tekmerion.config.json \
+              --out .tmp/site-$n \
+              --forma node_modules/@echelon-foundry/design-system/dist/all.css --json
+          done
+
+      - name: Builds are byte-identical (TEK-ARC-004)
+        run: diff -r --exclude=publication.json .tmp/site-1 .tmp/site-2
+
+      - name: Browser navigation with JavaScript disabled (GH-18)
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+          (cd .tmp/site-1 && python3 -m http.server 8765 >/dev/null 2>&1 &)
+          sleep 1
+          TEKMERION_SITE=http://localhost:8765/ node tests/e2e/slice-navigation.mjs
+
+      - name: Baseline measurement (recorded, not gated)
+        run: node scripts/tekmerion-baseline.mjs 3
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tekmerion-slice-site
+          path: .tmp/site-1
+          retention-days: 7

@@ -37,7 +37,9 @@ type Corpus =
       /// performed by the host through Contracts).
       State: PublicationState
       /// SHA-256 over the sorted (path, content hash) pairs of every input.
-      InputDigest: string }
+      InputDigest: string
+      /// Source commit of the research, when the host knows it.
+      Revision: string option }
 
 /// discover → parse → type → validate → **resolve** → (project) for GH-17.
 module Corpus =
@@ -309,4 +311,5 @@ module Corpus =
           Findings = findings
           Assessment = Assessment.evaluate findings
           State = state3
-          InputDigest = digest (input.Included @ input.FrontierCandidates) }
+          InputDigest = digest (input.Included @ input.FrontierCandidates)
+          Revision = input.Revision }
