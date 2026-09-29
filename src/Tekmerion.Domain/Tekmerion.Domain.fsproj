@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Tiers 1 and 2 (SDE): what can be true, and what legal change may happen.
+       References FSharp.Core only; no filesystem, JSON, network, clock or
+       browser. Enforced by Tekmerion.Domain.Tests/ArchitectureTests.fs. -->
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Tekmerion.Domain</AssemblyName>
+    <RootNamespace>Tekmerion.Domain</RootNamespace>
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Knowledge.fs" />
+    <Compile Include="Identity.fs" />
+    <Compile Include="Provenance.fs" />
+    <Compile Include="Artifacts.fs" />
+    <Compile Include="Relationships.fs" />
+    <Compile Include="Validation.fs" />
+    <Compile Include="Research.fs" />
+    <Compile Include="Review.fs" />
+    <Compile Include="Effects.fs" />
+    <Compile Include="Publication.fs" />
+  </ItemGroup>
+
+</Project>
