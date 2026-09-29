@@ -171,8 +171,29 @@ module Migrations =
                 let scripts = (Desired.forConfigurationVersion 2).Scripts
                 MigrationResult.combine (addMissingScripts scripts context) (refreshMarkingPrompt context) }
 
+    /// Move the installation from the Research Publisher identity to Tekmerion
+    /// (TEK-MIG-001). Content, scripts and ownership are untouched: the record
+    /// is rewritten under the new tool name and path by the normal manifest
+    /// step, and the legacy record is retired only after that write succeeds.
+    let private adoptTekmerionIdentity =
+        { Id = { FromVersion = 2; ToVersion = 3 }
+          Title = "Adopt the Tekmerion identity"
+          Summary =
+            sprintf
+                "Records the installation as '%s' at %s and retires %s. No repository content changes."
+                Identity.ToolName
+                Identity.ManifestPath
+                Identity.LegacyManifestPath
+          Preconditions = requirePackageJson
+          Plan =
+            fun context ->
+                { MigrationResult.empty with
+                    Skipped =
+                        [ { Target = "package.json#scripts"
+                            Reason = "Existing research:* scripts are kept; they remain supported aliases during the deprecation period." } ] } }
+
     /// Every supported transition, lowest first.
-    let all = [ adoptUnmanagedInstallation; addLifecycleInterface ]
+    let all = [ adoptUnmanagedInstallation; addLifecycleInterface; adoptTekmerionIdentity ]
 
     /// The ordered transitions needed to move an installation to the current version.
     let pathFrom (fromVersion: int) =

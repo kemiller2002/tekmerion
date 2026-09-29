@@ -1,14 +1,14 @@
 {
   "name": "@echelon-foundry/research-publisher",
   "version": "0.1.0",
-  "description": "Echelon Foundry research publishing capability: repository initialization, verification, diagnostics and upgrade tooling, plus the Markdown-to-static-site publishing engine it installs.",
+  "description": "Tekmerion (formerly Research Publisher): evidence-faithful research ingestion, validation and publication, plus repository initialization, verification, diagnostics and upgrade tooling.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kemiller2002/research-publisher.git"
+    "url": "git+https://github.com/kemiller2002/tekmerion.git"
   },
-  "homepage": "https://github.com/kemiller2002/research-publisher#readme",
+  "homepage": "https://github.com/kemiller2002/tekmerion#readme",
   "bugs": {
-    "url": "https://github.com/kemiller2002/research-publisher/issues"
+    "url": "https://github.com/kemiller2002/tekmerion/issues"
   },
   "keywords": [
     "echelon-foundry",
@@ -28,7 +28,8 @@
   },
   "type": "module",
   "bin": {
-    "research-publisher": "bin/research-publisher.js"
+    "research-publisher": "bin/research-publisher.js",
+    "tekmerion": "bin/tekmerion.js"
   },
   "exports": {
     ".": "./src/index.mjs"

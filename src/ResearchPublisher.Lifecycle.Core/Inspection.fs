@@ -34,6 +34,12 @@ type RepositoryInspection =
       PackageProblem: Problem option
       Consumer: ConsumerPackage option
       ManifestExists: bool
+      /// True when the pre-Tekmerion manifest (.echelon/research-publisher.json)
+      /// is on disk, whether or not the current one also is.
+      LegacyManifestPresent: bool
+      /// True when `Manifest` was read from the legacy location because the
+      /// current one does not exist yet.
+      ManifestIsLegacy: bool
       Manifest: Manifest option
       ManifestProblem: Problem option
       Artifacts: ArtifactObservation list
@@ -126,7 +132,18 @@ module Inspection =
 
         let consumerResult = readConsumerPackage packageJsonPath
 
-        let manifestPath = Path.Combine(root, Identity.ManifestPath)
+        let currentPath = Path.Combine(root, Identity.ManifestPath)
+        let legacyPath = Path.Combine(root, Identity.LegacyManifestPath)
+        let legacyPresent = File.Exists legacyPath
+
+        // The current manifest wins. The legacy one is read only when it is
+        // the sole record, so a half-finished migration resumes from the new
+        // record rather than the old one (TEK-MIG-002).
+        let manifestPath, manifestRelative, manifestIsLegacy =
+            if File.Exists currentPath then currentPath, Identity.ManifestPath, false
+            elif legacyPresent then legacyPath, Identity.LegacyManifestPath, true
+            else currentPath, Identity.ManifestPath, false
+
         let manifestExists = File.Exists manifestPath
 
         let manifest, manifestProblem =
@@ -138,11 +155,11 @@ module Inspection =
                     None,
                     Some(
                         Problem.create "manifest-unreadable" Error "The installation manifest could not be read." message
-                        |> Problem.withPath Identity.ManifestPath
+                        |> Problem.withPath manifestRelative
                     )
                 | Ok None -> None, None
                 | Ok (Some text) ->
-                    match Manifest.parse text with
+                    match Manifest.parseAt manifestRelative text with
                     | Ok manifest -> Some manifest, None
                     | Result.Error problem -> None, Some problem
 
@@ -169,6 +186,8 @@ module Inspection =
             | Ok consumer -> consumer
             | Result.Error _ -> None
           ManifestExists = manifestExists
+          LegacyManifestPresent = legacyPresent
+          ManifestIsLegacy = manifestIsLegacy
           Manifest = manifest
           ManifestProblem = manifestProblem
           Artifacts = desired.Artifacts |> List.map (observe root recordedHashes)
@@ -230,6 +249,10 @@ module Inspection =
                 let missingRequired =
                     inspection.Artifacts
                     |> List.filter (fun observation -> observation.Artifact.Required && not observation.Exists)
+                    // Before the identity migration the record lives at the legacy
+                    // path; the migration writes the current one.
+                    |> List.filter (fun observation ->
+                        not (inspection.ManifestIsLegacy && observation.Artifact.Path = Identity.ManifestPath))
 
                 if not missingRequired.IsEmpty then
                     Invalid
@@ -246,6 +269,10 @@ module Inspection =
                 elif manifest.ConfigurationVersion < Identity.CurrentConfigurationVersion then
                     UpgradeRequired(current, target)
                 elif manifest.InstalledVersion <> cliVersion then
+                    UpgradeRequired(current, target)
+                elif inspection.LegacyManifestPresent then
+                    // The Tekmerion record exists but the legacy one was not yet
+                    // retired: an interrupted migration that upgrade completes.
                     UpgradeRequired(current, target)
                 else
                     Installed current

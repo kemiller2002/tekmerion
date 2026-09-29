@@ -51,6 +51,7 @@ module Execution =
                 | CreateFile (path, _, _) -> step, resolve path
                 | UpdateManagedFile (path, _, _) -> step, resolve path
                 | WriteManifest _ -> step, resolve Identity.ManifestPath
+                | RetireLegacyManifest -> step, resolve Identity.LegacyManifestPath
                 | AddPackageScript _
                 | RunMigration _ -> step, None)
 
@@ -150,6 +151,7 @@ module Execution =
                 | UpdateManagedFile _ -> 2
                 | AddPackageScript _ -> 3
                 | WriteManifest _ -> 4
+                | RetireLegacyManifest -> 5
 
             resolved |> List.sortBy rank
 
@@ -203,6 +205,16 @@ module Execution =
                             step.Change
                             "manifest-write-failed"
                             "The installation manifest could not be written."
+                            error.Message
+                | RetireLegacyManifest, Some path ->
+                    try
+                        if File.Exists path then File.Delete path
+                        record step.Change Applied
+                    with error ->
+                        fail
+                            step.Change
+                            "legacy-manifest-retire-failed"
+                            "The superseded installation manifest could not be removed."
                             error.Message
                 | change, None ->
                     fail change "unresolved-path" "A planned change had no resolved path." "Internal planning error."

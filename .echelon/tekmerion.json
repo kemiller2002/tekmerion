@@ -1,9 +1,9 @@
 {
   "schema": "echelon.tool-installation/1",
-  "tool": "research-publisher",
+  "tool": "tekmerion",
   "package": "@echelon-foundry/research-publisher",
   "installedVersion": "0.1.0",
-  "configurationVersion": 2,
+  "configurationVersion": 3,
   "managedArtifacts": [
     {
       "id": "config",
@@ -18,7 +18,7 @@
     },
     {
       "id": "manifest",
-      "path": ".echelon/research-publisher.json",
+      "path": ".echelon/tekmerion.json",
       "ownership": "tool-owned"
     },
     {

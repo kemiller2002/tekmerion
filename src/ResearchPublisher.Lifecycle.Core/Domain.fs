@@ -3,8 +3,14 @@ namespace ResearchPublisher.Lifecycle.Core
 /// Identity of the capability this package installs into a repository.
 module Identity =
 
+    /// Tool identity recorded in the installation manifest (TEK-IDN-003).
     [<Literal>]
-    let ToolName = "research-publisher"
+    let ToolName = "tekmerion"
+
+    /// Tool identity written by releases before configuration version 3.
+    /// Recognised only so the migration can adopt it (TEK-MIG-001).
+    [<Literal>]
+    let LegacyToolName = "research-publisher"
 
     [<Literal>]
     let PackageName = "@echelon-foundry/research-publisher"
@@ -18,7 +24,11 @@ module Identity =
 
     /// Repository-relative path of this tool's installation manifest.
     [<Literal>]
-    let ManifestPath = ".echelon/research-publisher.json"
+    let ManifestPath = ".echelon/tekmerion.json"
+
+    /// Where releases before configuration version 3 kept the manifest.
+    [<Literal>]
+    let LegacyManifestPath = ".echelon/research-publisher.json"
 
     /// Schema identifier of the installation manifest document.
     [<Literal>]
@@ -26,7 +36,7 @@ module Identity =
 
     /// Configuration version written by the current release.
     [<Literal>]
-    let CurrentConfigurationVersion = 2
+    let CurrentConfigurationVersion = 3
 
     /// Lowest configuration version this release knows how to migrate from.
     /// Zero means "installed before manifests existed".

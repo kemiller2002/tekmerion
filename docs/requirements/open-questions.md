@@ -86,6 +86,27 @@ overturn), `retained` (needs an owner decision).
 - **Owner:** research format owner. **Blocks:** nothing. **Rule:** diagrams are
   presentation-only until declared otherwise.
 
+### OQ-TEK-014 — When is the npm package renamed to `@echelon-foundry/tekmerion`?
+
+- **Origin:** GH-15; `TEK-IDN-003`.
+- **Owner:** product owner (release/publishing authority).
+- **Why it needs the owner:** `publish.yml` publishes on every push to `main`
+  through npm trusted publishing. A new package name needs its trusted
+  publisher configured on npmjs.com by the account owner before the first
+  publish, and consumers must be told about the new name. Both are
+  outward-facing and not reversible by a commit.
+- **Blocks:** the package/executable rename part of `TEK-IDN-003` and the
+  deprecation notice of `TEK-IDN-004`.
+- **Rule until answered:** the lifecycle identity, manifest path and product
+  documentation are Tekmerion (migration 2→3); the package keeps publishing as
+  `@echelon-foundry/research-publisher`; `tekmerion` is shipped as an
+  additional executable alias; no deprecation notice is emitted yet.
+- **Recommended next action:** configure the trusted publisher for
+  `@echelon-foundry/tekmerion`, then change `package.json#name`,
+  `Identity.PackageName`/`ExecutableName`, the `research:*` → `tekmerion:*`
+  script migration (configuration version 4) and the deprecation notice in
+  one release.
+
 ## Resolved
 
 ### OQ-TEK-007 — Consume `frontier-graph.json` or re-derive from Markdown? — `resolved-provisional`

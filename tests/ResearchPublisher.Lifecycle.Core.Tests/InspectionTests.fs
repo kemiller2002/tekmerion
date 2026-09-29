@@ -107,7 +107,7 @@ module InspectionTests =
         let manifest =
             repository
                 .Read(Identity.ManifestPath)
-                .Replace("\"configurationVersion\": 2", "\"configurationVersion\": 99")
+                .Replace(sprintf "\"configurationVersion\": %d" Identity.CurrentConfigurationVersion, "\"configurationVersion\": 99")
 
         repository.Write(Identity.ManifestPath, manifest)
 

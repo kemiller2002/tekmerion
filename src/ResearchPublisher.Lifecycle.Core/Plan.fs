@@ -17,6 +17,9 @@ type PlannedChange =
     | UpdateManagedFile of path: string * ownership: Ownership * contents: string
     | AddPackageScript of name: string * command: string
     | WriteManifest of manifest: Manifest
+    /// Remove the pre-Tekmerion manifest. Always ordered after WriteManifest,
+    /// so there is never a moment with no installation record.
+    | RetireLegacyManifest
     | RunMigration of id: MigrationId * title: string
 
 module PlannedChange =
@@ -28,6 +31,7 @@ module PlannedChange =
         | UpdateManagedFile _ -> "update-managed-file"
         | AddPackageScript _ -> "add-package-script"
         | WriteManifest _ -> "write-manifest"
+        | RetireLegacyManifest -> "retire-legacy-manifest"
         | RunMigration _ -> "run-migration"
 
     let target change =
@@ -37,6 +41,7 @@ module PlannedChange =
         | UpdateManagedFile (path, _, _) -> path
         | AddPackageScript (name, _) -> sprintf "package.json#scripts.%s" name
         | WriteManifest _ -> Identity.ManifestPath
+        | RetireLegacyManifest -> Identity.LegacyManifestPath
         | RunMigration (id, _) -> MigrationId.describe id
 
     let describe change =
@@ -50,6 +55,7 @@ module PlannedChange =
                 "Write %s (configuration %d)"
                 Identity.ManifestPath
                 manifest.ConfigurationVersion
+        | RetireLegacyManifest -> sprintf "Remove %s (superseded by %s)" Identity.LegacyManifestPath Identity.ManifestPath
         | RunMigration (id, title) -> sprintf "Run migration %s: %s" (MigrationId.describe id) title
 
 type PlanStep =

@@ -83,6 +83,8 @@ module Api =
         let missingArtifacts =
             inspection.Artifacts
             |> List.filter (fun observation -> observation.Artifact.Required && not observation.Exists)
+            |> List.filter (fun observation ->
+                not (inspection.ManifestIsLegacy && observation.Artifact.Path = Identity.ManifestPath))
 
         let artifactStatus =
             match missingArtifacts with

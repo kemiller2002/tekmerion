@@ -1,10 +1,39 @@
-# Research Publisher
+# Tekmerion
 
-Publish a repository's Markdown research as a searchable static website, and keep
-the publishing capability installed, verified and up to date.
+**Tekmerion** (formerly *Research Publisher*) is an evidence-faithful research
+system: it reads durable research state from a repository, validates it,
+exposes its structure and provenance, and projects it into human-readable and
+machine-readable publications. Publishing is one projection of research state,
+not the product's whole identity. The canonical requirements are
+[`docs/requirements/tekmerion-requirements.md`](docs/requirements/tekmerion-requirements.md).
 
-`@echelon-foundry/research-publisher` is an Echelon Foundry engineering tool. It
-does two things:
+> **Naming status.** The product, lifecycle identity and installation record
+> are Tekmerion (`.echelon/tekmerion.json`; existing installations migrate
+> automatically on `upgrade`). The npm package is still published as
+> `@echelon-foundry/research-publisher` and its `research-publisher`
+> executable keeps working; a `tekmerion` executable alias is included. The
+> package rename to `@echelon-foundry/tekmerion` is pending an owner decision
+> (see `docs/requirements/open-questions.md`, OQ-TEK-014).
+
+### Tekmerion engine (F#, first vertical slice)
+
+`src/Tekmerion.*` is the new F# core: typed domain and legal state
+transitions, honest ingestion (no fabricated ids, dates or relationships),
+versioned `/data/v1` machine contracts, and a script-free static research site
+where every derived relationship explains itself. See
+[`docs/architecture/`](docs/architecture/README.md).
+
+```bash
+dotnet run --project src/Tekmerion.Cli -- ingest \
+  --config tests/fixtures/visual-engineering/tekmerion.config.json \
+  --out .tmp/site --forma node_modules/@echelon-foundry/design-system/dist/all.css
+```
+
+### Legacy publisher and lifecycle
+
+The package below still ships the original JavaScript publishing engine
+alongside the lifecycle CLI, and remains usable until the F# pipeline covers
+the existing corpus (TEK-ARC-006). It does two things:
 
 - **Publishing.** Discovers Markdown through configurable globs, normalises and
   validates research metadata, generates a public catalog and relationship graph,
@@ -108,7 +137,7 @@ It may create:
 | --- | --- |
 | `research-publisher.config.mjs` | user-owned |
 | `prompts/research-publisher-mark-documents.md` | shared |
-| `.echelon/research-publisher.json` | tool-owned |
+| `.echelon/tekmerion.json` | tool-owned |
 | `research:*` scripts in `package.json` | shared, additive only |
 
 It will never overwrite a file you own, never change a script you already
@@ -131,13 +160,16 @@ Full detail: [docs/installation.md](./docs/installation.md).
 
 ## Installation manifest
 
-`.echelon/research-publisher.json` records what is installed: the package
+`.echelon/tekmerion.json` records what is installed: the package
 version, the configuration version, every managed path with its ownership, and a
 content hash for the paths the tool may want to refresh. It contains no
 timestamps, no machine-specific values and no secrets. Commit it.
 
 `.echelon/` is the shared root for Echelon Foundry tooling; each tool owns one
-manifest inside it.
+manifest inside it. Installations recorded before configuration version 3 used
+`.echelon/research-publisher.json`; `upgrade` moves the record (migration
+2→3), writing the new file before removing the old one, and changes no other
+content.
 
 ## Upgrading
 
@@ -250,7 +282,7 @@ Unspecified roles keep their package defaults. See
 
 ## Organising a corpus
 
-Research Publisher keeps document type, project ownership, reader purpose,
+The legacy publisher keeps document type, project ownership, reader purpose,
 audience and front-page placement separate, so free-form tags do not become an
 unstable navigation system. See
 [Document Purpose And Project Guide Architecture](./docs/document-purpose-taxonomy.md).
@@ -316,4 +348,4 @@ remediation. For build-time problems in the corpus itself, see
 This repository is the package itself, and also a demo research corpus that the
 package publishes to GitHub Pages. That is why it contains `research/`, a second
 fixture project under `fixtures/` and its own `research-publisher.config.mjs`,
-and why it has `.echelon/research-publisher.json` like any other consumer.
+and why it has `.echelon/tekmerion.json` like any other consumer.

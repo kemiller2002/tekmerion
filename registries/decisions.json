@@ -51,6 +51,23 @@
     "work_item": "GH-18"
   },
   {
+    "created": "2026-09-29",
+    "decided_by": "Claude (Anthropic, claude-code runtime) executing GH-15; reversible",
+    "document_type": "decision-record",
+    "id": "DF-TEK-2026-0004",
+    "path": "research/decisions/DF-TEK-2026-0004--staged-identity-migration.md",
+    "related_documents": [
+      "research/decisions/DF-TEK-2026-0001--product-identity-and-requirements-baseline.md",
+      "docs/requirements/open-questions.md",
+      "docs/upgrading.md"
+    ],
+    "status": "accepted",
+    "title": "Staged Research Publisher → Tekmerion migration",
+    "updated": "2026-09-29",
+    "version": "1.0",
+    "work_item": "GH-15"
+  },
+  {
     "artifactType": "decision-framework",
     "authorAgent": "codex",
     "completion": 1,
