@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "research-publisher",
-  "nextSeq": 17,
+  "nextSeq": 18,
   "items": [
     {
       "id": "WI-0001",
@@ -265,6 +265,20 @@
       "attachments": [],
       "createdAt": "2026-09-29T10:09:32.153Z",
       "updatedAt": "2026-09-29T10:09:32.153Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0017",
+      "title": "OQ-TEK-001: propose declared sub-document object authoring contract (proposal only; acceptance owned by Praxis/ROS format owner)",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-09-29T11:22:08.356Z",
+      "updatedAt": "2026-09-29T11:22:49.000Z",
       "createdBy": "unknown",
       "source": "manual",
       "sourceReference": null

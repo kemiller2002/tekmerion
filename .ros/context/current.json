@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "claude",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-09-29T10:27:11.000Z",
+  "updatedAt": "2026-09-29T11:22:49.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -209,6 +209,27 @@
         "EXE-20260929T101924179Z-377651fc"
       ],
       "completedAt": "2026-09-29T10:27:11.000Z"
+    },
+    {
+      "id": "WI-0017",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "docs/requirements/proposals/PROP-TEK-2026-0001--declared-objects.md"
+        },
+        {
+          "type": "tests",
+          "path": "tests/integration/requirements-baseline.test.mjs"
+        }
+      ],
+      "updatedAt": "2026-09-29T11:22:49.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20260929T112224695Z-a0e6bfa7"
+      ],
+      "completedAt": "2026-09-29T11:22:49.000Z"
     }
   ]
 }
