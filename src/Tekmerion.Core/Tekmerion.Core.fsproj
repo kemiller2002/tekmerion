@@ -21,6 +21,8 @@
     <Compile Include="Corpus.fs" />
     <Compile Include="Json.fs" />
     <Compile Include="Contracts.fs" />
+    <Compile Include="Html.fs" />
+    <Compile Include="Site.fs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +32,9 @@
     <PackageReference Include="YamlDotNet" Version="18.1.0" />
     <!-- Pinned so the version does not depend on the installed SDK. -->
     <PackageReference Update="FSharp.Core" Version="10.1.400" />
+    <!-- Markdown body rendering for the static site; raw HTML disabled.
+         Decision: DF-TEK-2026-0003. -->
+    <PackageReference Include="Markdig" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>

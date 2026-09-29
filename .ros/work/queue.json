@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "research-publisher",
-  "nextSeq": 13,
+  "nextSeq": 17,
   "items": [
     {
       "id": "WI-0001",
@@ -201,6 +201,70 @@
       "attachments": [],
       "createdAt": "2026-09-29T09:38:21.918Z",
       "updatedAt": "2026-09-29T09:38:21.918Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0013",
+      "title": "Forma gap G13: no page shell / inline gutter primitive; Tekmerion pages touch the viewport edge (docs/architecture/tekmerion-experience.md)",
+      "description": null,
+      "tags": [
+        "gh-18"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T10:09:31.254Z",
+      "updatedAt": "2026-09-29T10:09:31.254Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0014",
+      "title": "Forma gap G14: no pre overflow rule; preformatted research diagrams overflow 46px at 320px on RP-COMP-005",
+      "description": null,
+      "tags": [
+        "gh-18"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T10:09:31.539Z",
+      "updatedAt": "2026-09-29T10:09:31.539Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0015",
+      "title": "GH-18 open: Limen interactive layer (F# engine + kernel: copy stable link, in-page relationship filter); boundary currently empty",
+      "description": null,
+      "tags": [
+        "gh-18"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T10:09:31.861Z",
+      "updatedAt": "2026-09-29T10:09:31.861Z",
+      "createdBy": "unknown",
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0016",
+      "title": "GH-18 open: unidentified 11px horizontal overflow at 320px on the project page",
+      "description": null,
+      "tags": [
+        "gh-18"
+      ],
+      "priority": "medium",
+      "status": "captured",
+      "attachments": [],
+      "createdAt": "2026-09-29T10:09:32.153Z",
+      "updatedAt": "2026-09-29T10:09:32.153Z",
       "createdBy": "unknown",
       "source": "manual",
       "sourceReference": null

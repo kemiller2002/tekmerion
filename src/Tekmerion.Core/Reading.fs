@@ -83,8 +83,11 @@ module Reading =
         | [] -> Absent Absence.NotDeclared
         | many -> Known(String.Join(", ", many))
 
-    let read (repository: RepositoryId) (path: RepoPath) (text: string) : ArtifactReading =
-        let fileLocation = SourceLocation.ofFile repository path
+    /// `revision` is the source commit when the host knows it; it is carried
+    /// into every location read from this file (TEK-PRV-003) and is never
+    /// guessed.
+    let readAt (repository: RepositoryId) (revision: string option) (path: RepoPath) (text: string) : ArtifactReading =
+        let fileLocation = { SourceLocation.ofFile repository path with Commit = revision }
         let atEntry (entry: FrontMatterEntry) : SourceLocation = fileLocation |> SourceLocation.atKey entry.Key (Some entry.Line)
 
         let entries, body, bodyStartLine, state, splitFindings =
@@ -226,3 +229,5 @@ module Reading =
           References = references
           Findings = (splitFindings @ idFindings @ typeFindings @ missingIdFinding @ unknownKeyFindings) |> List.map subjectOf
           FrontMatter = state }
+
+    let read (repository: RepositoryId) (path: RepoPath) (text: string) : ArtifactReading = readAt repository None path text

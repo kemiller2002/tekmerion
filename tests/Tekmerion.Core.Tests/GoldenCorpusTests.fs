@@ -155,7 +155,8 @@ module GoldenCorpusTests =
                 { Repository = repository
                   Included = reloaded.Artifacts |> List.filter (fun a -> a.Population = AuthoredResearch) |> List.map (fun a -> a.Reading.Artifact.Location.Path) |> List.rev |> List.map (fun p -> { Path = p; Text = System.IO.File.ReadAllText(System.IO.Path.Combine(fixtureRoot, RepoPath.value p)) })
                   FrontierCandidates = reloaded.Artifacts |> List.filter (fun a -> a.Population = MachineGenerated) |> List.map (fun a -> a.Reading.Artifact.Location.Path) |> List.rev |> List.map (fun p -> { Path = p; Text = System.IO.File.ReadAllText(System.IO.Path.Combine(fixtureRoot, RepoPath.value p)) })
-                  RepositoryFiles = System.IO.File.ReadAllLines(System.IO.Path.Combine(fixtureRoot, "repository-files.txt")) |> Set.ofArray }
+                  RepositoryFiles = System.IO.File.ReadAllLines(System.IO.Path.Combine(fixtureRoot, "repository-files.txt")) |> Set.ofArray
+                  Revision = reloaded.Artifacts.Head.Reading.Artifact.Location.Commit }
 
         Assert.Equal<OutputFile list>(Contracts.project reloaded, Contracts.project reversed)
 

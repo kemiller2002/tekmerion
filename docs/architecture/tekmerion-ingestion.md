@@ -104,8 +104,8 @@ requirement stays open.
 
 ## Known limitations
 
-- No HTML is produced yet; that is GH-18.
-- Legacy URL redirects are not yet emitted (TEK-IDY-006, GH-18/19).
+- HTML is produced by GH-18 (see `tekmerion-experience.md`).
+- Legacy URL redirects are emitted by GH-18 from the committed legacy catalog.
 - `publication.json` (wall-clock record, TEK-PUB-002) is GH-19.
 - The frontier-record id stability question (OQ-TEK-002) is unresolved, so
   frontier URLs are not advertised as permanent.

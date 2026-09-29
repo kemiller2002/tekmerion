@@ -7,6 +7,19 @@ open System.Text.Json
 /// versioned; nothing in it duplicates what research already declares.
 type FrontierConfig = { Records: string; Scope: string }
 
+/// Presentation settings for the static site (GH-18). All optional.
+type SiteConfig =
+    { Title: string option
+      /// Link template for source files: `{path}`, `{line}` and `{revision}`
+      /// are substituted. Links are only emitted when a revision is known, so
+      /// a link never points at a moving branch.
+      SourceUrl: string option
+      /// A previously published catalog (legacy `research-catalog.json`)
+      /// whose `records[].url`/`sourcePath` pairs are the URLs to preserve.
+      LegacyCatalog: string option
+      /// Base path the legacy URLs were published under, e.g. `/Visual-Engineering/`.
+      LegacyBasePath: string option }
+
 type TekmerionConfig =
     { SchemaVersion: int
       Repository: string
@@ -14,7 +27,10 @@ type TekmerionConfig =
       Frontier: FrontierConfig option
       /// Optional file listing repository paths (one per line). When absent
       /// the host lists the repository directory itself.
-      RepositoryFiles: string option }
+      RepositoryFiles: string option
+      /// Source commit of the research repository, when known.
+      Revision: string option
+      Site: SiteConfig }
 
 module Config =
 
@@ -65,7 +81,20 @@ module Config =
                       Repository = (text root "repository").Value
                       Include = includes
                       Frontier = frontier
-                      RepositoryFiles = text root "repositoryFiles" }
+                      RepositoryFiles = text root "repositoryFiles"
+                      Revision = text root "revision"
+                      Site =
+                        match root.TryGetProperty "site" with
+                        | true, site when site.ValueKind = JsonValueKind.Object ->
+                            { Title = text site "title"
+                              SourceUrl = text site "sourceUrl"
+                              LegacyCatalog = text site "legacyCatalog"
+                              LegacyBasePath = text site "legacyBasePath" }
+                        | _ ->
+                            { Title = None
+                              SourceUrl = None
+                              LegacyCatalog = None
+                              LegacyBasePath = None } }
             else
                 Error problems
         with :? JsonException as error ->

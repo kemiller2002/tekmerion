@@ -6,6 +6,8 @@
 | GH-13 | GH-13 | complete |  |  |
 | GH-14 | GH-14 | complete |  |  |
 | GH-16 | GH-16 | active |  |  |
+| GH-17 | GH-17 | complete |  |  |
+| GH-18 | GH-18 | active |  |  |
 | ROS-INSTALL-1-2-1 | ROS-INSTALL-1-2-1 | complete |  |  |
 | WI-0001 | Install Echelon Foundry SDE 1.2.0 | active | mechanical | medium |
 | WI-0002 | Upgrade ROS installation from 1.2.1 to 3.0.3 | complete |  | high |
@@ -19,3 +21,7 @@
 | WI-0010 | Tekmerion: ros.json rosVersion still 3.0.3 (legacy fallback, ignored by the 3.1.4 launcher); align only through a supported lifecycle path or owner decision | captured | echelon,gh-16 | medium |
 | WI-0011 | Re-run the vNext gap analysis against the requirements draft that landed mid-discovery | active |  | high |
 | WI-0012 | Tekmerion: adopt EchelonFoundry.Aegis.Core 1.0.0 at F# host boundaries (doc 18 section 2); planned with the GH-17 ingestion host | captured | echelon,gh-16 | medium |
+| WI-0013 | Forma gap G13: no page shell / inline gutter primitive; Tekmerion pages touch the viewport edge (docs/architecture/tekmerion-experience.md) | captured | gh-18 | medium |
+| WI-0014 | Forma gap G14: no pre overflow rule; preformatted research diagrams overflow 46px at 320px on RP-COMP-005 | captured | gh-18 | medium |
+| WI-0015 | GH-18 open: Limen interactive layer (F# engine + kernel: copy stable link, in-page relationship filter); boundary currently empty | captured | gh-18 | medium |
+| WI-0016 | GH-18 open: unidentified 11px horizontal overflow at 320px on the project page | captured | gh-18 | medium |
