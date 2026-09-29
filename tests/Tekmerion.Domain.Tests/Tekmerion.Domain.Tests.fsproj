@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <GenerateProgramFile>true</GenerateProgramFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Fixtures.fs" />
+    <Compile Include="KnowledgeTests.fs" />
+    <Compile Include="IdentityTests.fs" />
+    <Compile Include="ArtifactTests.fs" />
+    <Compile Include="RelationshipTests.fs" />
+    <Compile Include="ValidationTests.fs" />
+    <Compile Include="ResearchTests.fs" />
+    <Compile Include="ReviewTests.fs" />
+    <Compile Include="PublicationTests.fs" />
+    <Compile Include="ArchitectureTests.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Tekmerion.Domain/Tekmerion.Domain.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Pin FSharp.Core so the version does not depend on which SDK the
+         machine has (global.json rolls forward). Matches Aegis.Core's floor. -->
+    <PackageReference Update="FSharp.Core" Version="10.1.400" />
+  </ItemGroup>
+
+</Project>
