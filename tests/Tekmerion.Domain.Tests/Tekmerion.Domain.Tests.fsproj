@@ -29,4 +29,10 @@
     <ProjectReference Include="../../src/Tekmerion.Domain/Tekmerion.Domain.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Pin FSharp.Core so the version does not depend on which SDK the
+         machine has (global.json rolls forward). Matches Aegis.Core's floor. -->
+    <PackageReference Update="FSharp.Core" Version="10.1.400" />
+  </ItemGroup>
+
 </Project>
