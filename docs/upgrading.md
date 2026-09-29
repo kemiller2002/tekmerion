@@ -36,6 +36,8 @@ shape:
 | Not installed | Refused, exit `4`. Run `init` instead. |
 | Pre-manifest installation (version 0) | Adopted, then migrated to the current version. |
 | Version 1 | Migrated to the current version. |
+| Version 2 (Research Publisher identity, `.echelon/research-publisher.json`) | Migration 2→3 records the installation as `tekmerion` at `.echelon/tekmerion.json`, then removes the legacy record. No other file changes; locally edited shared and user-owned files are untouched. |
+| Both records present (a 2→3 migration interrupted after writing the new record) | `upgrade` resumes: the new record is authoritative and the legacy one is removed. |
 | Current version, older package release | Manifest re-recorded with the new version; no other change. |
 | Current version, same release | No changes. |
 | Configuration version newer than the CLI | Refused, exit `4`. Install a newer release. |

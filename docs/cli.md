@@ -14,7 +14,12 @@ npx @echelon-foundry/research-publisher <command> [options]
 ```
 
 If the package is installed as a dependency, the same executable is on the path
-as `research-publisher`.
+as `research-publisher` and as `tekmerion` (identical routing; `tekmerion` is the
+product name, `research-publisher` remains a supported alias until the package
+is renamed — see OQ-TEK-014 in `docs/requirements/open-questions.md`).
+
+The new F# Tekmerion engine (`tekmerion validate|ingest`, `src/Tekmerion.Cli`)
+is not yet part of the npm package; see `docs/architecture/tekmerion-ingestion.md`.
 
 ## Global options
 
@@ -59,7 +64,7 @@ research-publisher (@echelon-foundry/research-publisher)
   CLI version:           0.1.0
   Installed version:     0.1.0
   Configuration:         valid (version 2 of 2)
-  Installation:          installed (0.1.0, configuration 2)
+  Installation:          installed (0.1.0, configuration 3)
   Required artifacts:    valid
   Integration:           valid
   Verification:          passed
@@ -192,16 +197,16 @@ Every document also carries `tool`, `package`, `cliVersion` and `exitCode`.
   "cliVersion": "0.1.0",
   "repositoryRoot": "/repo",
   "state": "installed",
-  "stateDescription": "installed (0.1.0, configuration 2)",
+  "stateDescription": "installed (0.1.0, configuration 3)",
   "installedVersion": "0.1.0",
-  "configurationVersion": 2,
-  "currentConfigurationVersion": 2,
+  "configurationVersion": 3,
+  "currentConfigurationVersion": 3,
   "configuration": "valid",
   "artifacts": "valid",
   "integration": "valid",
   "verification": { "passed": true, "strict": false, "checks": [] },
   "upgradeAvailable": null,
-  "manifestPath": ".echelon/research-publisher.json",
+  "manifestPath": ".echelon/tekmerion.json",
   "exitCode": 0
 }
 ```
@@ -228,7 +233,7 @@ severity, and `healthy` reflects the requested strictness.
   "executable": true,
   "operation": "init",
   "fromState": "not-installed",
-  "target": { "toolVersion": "0.1.0", "configurationVersion": 2 },
+  "target": { "toolVersion": "0.1.0", "configurationVersion": 3 },
   "migrations": [],
   "changeCount": 11,
   "changes": [

@@ -74,12 +74,12 @@ module Manifest =
         Json.write true body + "\n"
 
     /// Parse a manifest, reporting why it is unusable rather than throwing.
-    let parse (text: string) : Result<Manifest, Problem> =
+    let parseAt (manifestPath: string) (text: string) : Result<Manifest, Problem> =
         let invalid detail =
             Problem.create "manifest-unreadable" Error "The installation manifest is not valid." detail
-            |> Problem.withPath Identity.ManifestPath
+            |> Problem.withPath manifestPath
             |> Problem.withRemediation (
-                sprintf "Delete %s and run `npx %s init` to rebuild it." Identity.ManifestPath Identity.PackageName
+                sprintf "Delete %s and run `npx %s init` to rebuild it." manifestPath Identity.PackageName
             )
 
         match Json.tryParse text with
@@ -106,10 +106,10 @@ module Manifest =
                         Error
                         "The installation manifest uses an unsupported schema."
                         (sprintf "Found '%s'; this release understands '%s'." schema Identity.ManifestSchema)
-                    |> Problem.withPath Identity.ManifestPath
+                    |> Problem.withPath manifestPath
                     |> Problem.withRemediation "Upgrade the tool, or delete the manifest and re-run `init`."
                 )
-            | _, Some tool, _, _ when tool <> Identity.ToolName ->
+            | _, Some tool, _, _ when tool <> Identity.ToolName && tool <> Identity.LegacyToolName ->
                 Result.Error(invalid (sprintf "The manifest belongs to the '%s' tool." tool))
             | _, _, None, _ -> Result.Error(invalid "The manifest is missing the 'installedVersion' field.")
             | _, _, _, None -> Result.Error(invalid "The manifest is missing a numeric 'configurationVersion' field.")
@@ -144,7 +144,9 @@ module Manifest =
 
                 Ok
                     { Schema = schema
-                      Tool = Identity.ToolName
+                      // Kept as read, so a legacy identity is visible to the
+                      // migration rather than silently rewritten here.
+                      Tool = tool |> Option.defaultValue Identity.ToolName
                       Package =
                         Json.tryStringProperty "package" root
                         |> Option.defaultValue Identity.PackageName
@@ -152,3 +154,6 @@ module Manifest =
                       ConfigurationVersion = configurationVersion
                       ManagedArtifacts = artifacts
                       ManagedScripts = scripts }
+
+    /// Parse a manifest read from the current manifest path.
+    let parse (text: string) : Result<Manifest, Problem> = parseAt Identity.ManifestPath text

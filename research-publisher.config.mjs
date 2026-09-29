@@ -7,8 +7,8 @@ export default {
     siteUrl: "https://research-publisher.echelonfoundry.com/"
   },
   repository: {
-    name: "research-publisher",
-    sourceUrl: "https://github.com/kemiller2002/research-publisher"
+    name: "tekmerion",
+    sourceUrl: "https://github.com/kemiller2002/tekmerion"
   },
   content: {
     include: [

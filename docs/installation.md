@@ -50,7 +50,7 @@ npx @echelon-foundry/research-publisher init --check
 | --- | --- | --- |
 | `research-publisher.config.mjs` | user-owned | Missing |
 | `prompts/research-publisher-mark-documents.md` | shared | Missing |
-| `.echelon/research-publisher.json` | tool-owned | Always kept current |
+| `.echelon/tekmerion.json` | tool-owned | Always kept current |
 | `package.json` scripts `research:inventory`, `research:validate`, `research:build`, `research:clean`, `research:status`, `research:verify`, `research:doctor` | shared | Any are missing |
 
 ## What `init` will not do
@@ -82,7 +82,7 @@ Current classifications:
 | --- | --- | --- |
 | `research-publisher.config.mjs` | user-owned | You are expected to edit this. |
 | `prompts/research-publisher-mark-documents.md` | shared | Edit it if you want; upgrades will then leave it alone. |
-| `.echelon/research-publisher.json` | tool-owned | Do not edit by hand. |
+| `.echelon/tekmerion.json` | tool-owned | Do not edit by hand. |
 | `package.json` | shared | Only additive script changes are made. |
 | `dist/` | generated | Rendered site output. |
 | `.research-publisher/` | generated | Engine cache. |
@@ -94,16 +94,18 @@ even when the template changes.
 
 ## Installation manifest
 
-`.echelon/research-publisher.json` is the machine-readable record of what is
-installed. The presence of arbitrary files is not used as the source of truth.
+`.echelon/tekmerion.json` is the machine-readable record of what is
+installed. (Before configuration version 3 it was
+`.echelon/research-publisher.json`; `upgrade` migrates it — see
+[upgrading.md](upgrading.md).) The presence of arbitrary files is not used as the source of truth.
 
 ```json
 {
   "schema": "echelon.tool-installation/1",
-  "tool": "research-publisher",
+  "tool": "tekmerion",
   "package": "@echelon-foundry/research-publisher",
   "installedVersion": "0.1.0",
-  "configurationVersion": 2,
+  "configurationVersion": 3,
   "managedArtifacts": [
     {
       "id": "marking-prompt",

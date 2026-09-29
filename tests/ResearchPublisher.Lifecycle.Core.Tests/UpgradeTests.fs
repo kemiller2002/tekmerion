@@ -88,7 +88,7 @@ module UpgradeTests =
         let plan = upgrade repository
 
         Assert.Equal<MigrationId list>(
-            [ { FromVersion = 0; ToVersion = 1 }; { FromVersion = 1; ToVersion = 2 } ],
+            [ { FromVersion = 0; ToVersion = 1 }; { FromVersion = 1; ToVersion = 2 }; { FromVersion = 2; ToVersion = 3 } ],
             plan.Migrations
         )
 
@@ -115,7 +115,7 @@ module UpgradeTests =
 
         let plan = upgrade repository
 
-        Assert.Equal<MigrationId list>([ { FromVersion = 1; ToVersion = 2 } ], plan.Migrations)
+        Assert.Equal<MigrationId list>([ { FromVersion = 1; ToVersion = 2 }; { FromVersion = 2; ToVersion = 3 } ], plan.Migrations)
         Assert.True (Api.apply plan).Succeeded
 
     [<Fact>]

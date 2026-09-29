@@ -58,7 +58,7 @@ module ManifestTests =
 
     [<Fact>]
     let ``rejects a manifest belonging to another tool`` () =
-        let text = (Manifest.render sample).Replace("\"tool\": \"research-publisher\"", "\"tool\": \"sde\"")
+        let text = (Manifest.render sample).Replace(sprintf "\"tool\": \"%s\"" sample.Tool, "\"tool\": \"sde\"")
 
         match Manifest.parse text with
         | Ok _ -> failwith "Expected another tool's manifest to be rejected."

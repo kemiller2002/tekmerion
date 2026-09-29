@@ -74,6 +74,18 @@ module Verification =
                     (sprintf "%s is missing, so the installation is not recorded." Identity.ManifestPath)
                 |> at Identity.ManifestPath
                 |> fix (sprintf "Run `npx %s init`." Identity.PackageName)
+            | Some manifest when inspection.ManifestIsLegacy ->
+                check
+                    "manifest"
+                    "Installation manifest"
+                    Warn
+                    (sprintf
+                        "Recorded installation %s at configuration version %d under the previous identity at %s."
+                        manifest.InstalledVersion
+                        manifest.ConfigurationVersion
+                        Identity.LegacyManifestPath)
+                |> at Identity.LegacyManifestPath
+                |> fix (sprintf "Run `npx %s upgrade` to adopt the Tekmerion identity." Identity.PackageName)
             | Some manifest ->
                 check
                     "manifest"

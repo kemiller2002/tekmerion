@@ -13,6 +13,7 @@
     <Compile Include="InspectionTests.fs" />
     <Compile Include="PlanningTests.fs" />
     <Compile Include="UpgradeTests.fs" />
+    <Compile Include="IdentityMigrationTests.fs" />
     <Compile Include="VerificationTests.fs" />
     <Compile Include="DoctorTests.fs" />
     <Compile Include="ArchitectureTests.fs" />

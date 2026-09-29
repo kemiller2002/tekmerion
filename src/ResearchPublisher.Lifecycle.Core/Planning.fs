@@ -307,6 +307,14 @@ module Planning =
             else
                 []
 
+        // After the manifest is written, retire the pre-Tekmerion record.
+        let retireSteps =
+            if inspection.LegacyManifestPresent then
+                [ { Change = RetireLegacyManifest
+                    Reason = "The installation is now recorded at the Tekmerion manifest path." } ]
+            else
+                []
+
         let manifestSkipped =
             if manifestChanged then
                 []
@@ -321,7 +329,7 @@ module Planning =
             { ToolVersion = cliVersion
               ConfigurationVersion = Identity.CurrentConfigurationVersion }
           Migrations = appliedMigrations
-          Steps = contentSteps @ manifestSteps
+          Steps = contentSteps @ manifestSteps @ retireSteps
           Skipped = repairSkipped @ migrationResult.Skipped @ convergenceSkipped @ manifestSkipped
           Conflicts = migrationResult.Conflicts
           Blockers =

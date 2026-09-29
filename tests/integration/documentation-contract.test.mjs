@@ -105,7 +105,12 @@ describe("documentation and CLI agree", () => {
   });
 
   it("the package declares the bin the documentation tells people to run", () => {
-    expect(packageJson.bin).toEqual({ "research-publisher": "bin/research-publisher.js" });
+    // `tekmerion` is the product executable (TEK-IDN-003); `research-publisher`
+    // stays a supported alias until the package rename (OQ-TEK-014).
+    expect(packageJson.bin).toEqual({
+      "research-publisher": "bin/research-publisher.js",
+      tekmerion: "bin/tekmerion.js"
+    });
   });
 
   it("the package publishes the launcher, the runtimes and the runtime template", () => {
