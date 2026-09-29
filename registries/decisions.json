@@ -1,5 +1,23 @@
 [
   {
+    "created": "2026-09-29",
+    "decided_by": "Claude (Anthropic, claude-code runtime) executing GH-13 under owner instruction; reversible until the first release under the new names",
+    "document_type": "decision-record",
+    "id": "DF-TEK-2026-0001",
+    "path": "research/decisions/DF-TEK-2026-0001--product-identity-and-requirements-baseline.md",
+    "related_documents": [
+      "docs/requirements/tekmerion-requirements.md",
+      "docs/requirements/open-questions.md",
+      "docs/requirements/traceability.md",
+      "docs/vnext/15-requirements-v0.2.0.md"
+    ],
+    "status": "accepted",
+    "title": "Tekmerion product identity, naming contract and canonical requirements baseline",
+    "updated": "2026-09-29",
+    "version": "1.0",
+    "work_item": "GH-13"
+  },
+  {
     "artifactType": "decision-framework",
     "authorAgent": "codex",
     "completion": 1,
