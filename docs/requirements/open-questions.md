@@ -43,9 +43,14 @@ overturn), `retained` (needs an owner decision).
   research) are parsed as canonical typed document links when present
   (`TEK-REL-001`), which is the only part of v0.2 Q1 answerable without the
   owner.
-- **Recommended next action:** record a Praxis requirement proposing a minimal
-  declared-object block (id, kind, source span, relations by id). Recorded as
-  local backlog item; not filed upstream without the owner.
+- **Proposal:** [`PROP-TEK-2026-0001`](proposals/PROP-TEK-2026-0001--declared-objects.md)
+  (WI-0017). It proposes an optional front-matter `declares` block: declared
+  id and kind, optional section, statement and authorship, and relations by
+  id. It has not been accepted, and it has not been filed upstream without the
+  owner.
+- **Recommended next action:** the Praxis/ROS format owner accepts, narrows or
+  rejects `PROP-TEK-2026-0001`. Acceptance is recorded by a decision record
+  that adds the contract to `AuthoringContracts.approved`.
 
 ### OQ-TEK-002 — Are frontier record ids stable across source edits?
 

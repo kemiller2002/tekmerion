@@ -5,9 +5,11 @@
 | GH-11 | Converge Research Publisher implementation baseline | active | readiness,bootstrap | high |
 | GH-13 | GH-13 | complete |  |  |
 | GH-14 | GH-14 | complete |  |  |
+| GH-15 | GH-15 | complete |  |  |
 | GH-16 | GH-16 | active |  |  |
 | GH-17 | GH-17 | complete |  |  |
 | GH-18 | GH-18 | active |  |  |
+| GH-19 | GH-19 | complete |  |  |
 | ROS-INSTALL-1-2-1 | ROS-INSTALL-1-2-1 | complete |  |  |
 | WI-0001 | Install Echelon Foundry SDE 1.2.0 | active | mechanical | medium |
 | WI-0002 | Upgrade ROS installation from 1.2.1 to 3.0.3 | complete |  | high |
@@ -25,3 +27,4 @@
 | WI-0014 | Forma gap G14: no pre overflow rule; preformatted research diagrams overflow 46px at 320px on RP-COMP-005 | captured | gh-18 | medium |
 | WI-0015 | GH-18 open: Limen interactive layer (F# engine + kernel: copy stable link, in-page relationship filter); boundary currently empty | captured | gh-18 | medium |
 | WI-0016 | GH-18 open: unidentified 11px horizontal overflow at 320px on the project page | captured | gh-18 | medium |
+| WI-0017 | OQ-TEK-001: propose declared sub-document object authoring contract (proposal only; acceptance owned by Praxis/ROS format owner) | complete |  | medium |
