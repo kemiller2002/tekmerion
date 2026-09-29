@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- SDE tier 3: parse, resolve, validate and project. Pure functions over
+       text supplied by a host; no filesystem, network or clock access. -->
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Tekmerion.Core</AssemblyName>
+    <RootNamespace>Tekmerion.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Version.fs" />
+    <Compile Include="Hashing.fs" />
+    <Compile Include="Glob.fs" />
+    <Compile Include="FrontMatter.fs" />
+    <Compile Include="Markdown.fs" />
+    <Compile Include="References.fs" />
+    <Compile Include="Reading.fs" />
+    <Compile Include="Frontier.fs" />
+    <Compile Include="Corpus.fs" />
+    <Compile Include="Json.fs" />
+    <Compile Include="Contracts.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- YAML block scalars, flow sequences and nested maps occur in the real
+         corpus; a hand-written subset parser would misread them.
+         Decision: DF-TEK-2026-0002. -->
+    <PackageReference Include="YamlDotNet" Version="18.1.0" />
+    <!-- Pinned so the version does not depend on the installed SDK. -->
+    <PackageReference Update="FSharp.Core" Version="10.1.400" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Tekmerion.Domain/Tekmerion.Domain.fsproj" />
+  </ItemGroup>
+
+</Project>

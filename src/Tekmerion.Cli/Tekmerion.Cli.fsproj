@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- SDE tier 4: the only Tekmerion project that touches the filesystem.
+       Every operational boundary goes through Aegis (doc 18 §2). -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>tekmerion</AssemblyName>
+    <RootNamespace>Tekmerion.Cli</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Faults.fs" />
+    <Compile Include="Config.fs" />
+    <Compile Include="FileSystem.fs" />
+    <Compile Include="Output.fs" />
+    <Compile Include="Commands.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EchelonFoundry.Aegis.Core" Version="1.0.0" />
+    <!-- Aegis.Core 1.0.0 requires FSharp.Core >= 10.1.400. -->
+    <PackageReference Update="FSharp.Core" Version="10.1.400" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Tekmerion.Core/Tekmerion.Core.fsproj" />
+  </ItemGroup>
+
+</Project>

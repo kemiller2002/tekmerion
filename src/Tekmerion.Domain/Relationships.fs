@@ -6,8 +6,10 @@ type CanonicalRelation =
     | SourceRep
     | Supersedes
     | SupersededBy
-    /// document -> frontier record it originated
-    | Originates
+    /// frontier record -> the document it originated from, as declared in the
+    /// record's evidence trace (the frontier pipeline calls the inverse
+    /// `originates`; that inverse is a derived backlink here)
+    | OriginDocument
     /// frontier record -> prerequisite frontier record
     | Prerequisite
     /// explicit typed id list (`evidenceIds`, `hypothesisIds`, `theoryIds`)
@@ -50,7 +52,7 @@ module CanonicalRelation =
         | SourceRep -> "source-rep"
         | Supersedes -> "supersedes"
         | SupersededBy -> "superseded-by"
-        | Originates -> "originates"
+        | OriginDocument -> "origin-document"
         | Prerequisite -> "prerequisite"
         | TypedLink field -> $"typed-link:{field}"
 
@@ -74,6 +76,7 @@ module Derivation =
                       Relation = Backlink edge.Relation
                       Rule = BacklinkRule
                       Basis = NonEmpty.singleton edge }
+            | OutOfScope _
             | Dangling _
             | NotALink _ -> None)
         |> List.sortBy (fun edge ->

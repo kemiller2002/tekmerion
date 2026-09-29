@@ -18,6 +18,23 @@
     "work_item": "GH-13"
   },
   {
+    "created": "2026-09-29",
+    "decided_by": "Claude (Anthropic, claude-code runtime) executing GH-17; reversible",
+    "document_type": "decision-record",
+    "id": "DF-TEK-2026-0002",
+    "path": "research/decisions/DF-TEK-2026-0002--typed-ingestion-slice.md",
+    "related_documents": [
+      "docs/architecture/tekmerion-ingestion.md",
+      "docs/requirements/tekmerion-requirements.md",
+      "research/decisions/DF-TEK-2026-0001--product-identity-and-requirements-baseline.md"
+    ],
+    "status": "accepted",
+    "title": "Typed ingestion for the first vertical slice — boundaries, dependencies and relationship rules",
+    "updated": "2026-09-29",
+    "version": "1.0",
+    "work_item": "GH-17"
+  },
+  {
     "artifactType": "decision-framework",
     "authorAgent": "codex",
     "completion": 1,

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "repository": "kemiller2002/visual-engineering",
+  "include": [
+    "content/projects/composition-science/**/*.md",
+    "content/archive/duplicates/composition-science/*.md"
+  ],
+  "frontier": {
+    "records": "research/frontier/records/*.md",
+    "scope": "origin-in-scope"
+  },
+  "repositoryFiles": "repository-files.txt"
+}

@@ -25,6 +25,7 @@ type FindingCode =
     | MissingDeclaredType
     | NoFrontMatter
     | UnknownKey of key: string
+    | OutOfScopeReference of path: string
     | Orphan
 
 type Severity =
@@ -62,6 +63,7 @@ module Policy =
         | MissingDeclaredType
         | NoFrontMatter
         | UnknownKey _
+        | OutOfScopeReference _
         | Orphan -> Informational
 
     /// Stable machine code for contracts and tests (TEK-VAL-001).
@@ -85,6 +87,7 @@ module Policy =
         | MissingDeclaredType -> "missing-declared-type"
         | NoFrontMatter -> "no-front-matter"
         | UnknownKey _ -> "unknown-key"
+        | OutOfScopeReference _ -> "out-of-scope-reference"
         | Orphan -> "orphan"
 
 /// An unmet condition derived from unresolved work (TEK-VAL-005). A blocking
