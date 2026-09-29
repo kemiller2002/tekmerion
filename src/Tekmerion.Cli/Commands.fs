@@ -229,6 +229,9 @@ module Commands =
                     | _ ->
                         let digest = Output.digest files
                         let projected = apply corpus.State (OutputProjected digest)
+                        let (ContentDigest digestText) = digest
+                        // Host clock (tier 4); the only wall-clock value in the output.
+                        let files = files @ [ Contracts.publicationRecord corpus digestText DateTimeOffset.UtcNow ]
 
                         match Output.recover aegis out with
                         | Result.Error fault -> { (fail ExitCode.EnvironmentFailure [ Faults.describe fault ]) with Corpus = Some corpus }

@@ -288,6 +288,27 @@ module Contracts =
         | Dangling _ -> "dangling"
         | NotALink _ -> "not-a-link"
 
+    /// The one place a wall-clock value may appear (TEK-ARC-004, TEK-PUB-002).
+    /// It is not listed in the manifest, not part of the content digest and
+    /// excluded from determinism comparisons.
+    [<Literal>]
+    let PublicationRecord = "publication.json"
+
+    let publicationRecord (corpus: Corpus) (contentDigest: string) (publishedAt: DateTimeOffset) : OutputFile =
+        { Path = PublicationRecord
+          Text =
+            Json.serialize (
+                Json.obj
+                    [ "schemaVersion", Json.str Version.ContractSchema
+                      "producer", Json.obj [ "name", Json.str "tekmerion"; "version", Json.str Version.Tekmerion ]
+                      "repository", Json.str (RepositoryId.value corpus.Repository)
+                      "sourceRevision", Json.ofOption Json.str corpus.Revision
+                      "contentDigest", Json.str contentDigest
+                      "manifest", Json.str $"{Root}/manifest.json"
+                      "publishedAt", Json.str (publishedAt.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+                      "note", Json.str "Not content: excluded from the content digest and from determinism checks." ]
+            ) }
+
     /// Every contract file, manifest last so it can list the others' hashes.
     let project (corpus: Corpus) : OutputFile list =
         let file path json = { Path = path; Text = Json.serializeCompact json }
@@ -320,8 +341,14 @@ module Contracts =
                 [ "schemaVersion", Json.str Version.ContractSchema
                   "producer", Json.obj [ "name", Json.str "tekmerion"; "version", Json.str Version.Tekmerion; "parserProfile", Json.str Version.ParserProfile ]
                   "repository", Json.str (RepositoryId.value corpus.Repository)
+                  "sourceRevision", Json.ofOption Json.str corpus.Revision
                   "inputDigest", Json.str corpus.InputDigest
                   "state", Json.str (Publication.stateName corpus.State)
+                  "validation",
+                  Json.obj
+                      [ "blocking", Json.int (corpus.Findings |> List.filter (fun f -> Policy.severity f.Code = Blocking) |> List.length)
+                        "warning", Json.int (corpus.Findings |> List.filter (fun f -> Policy.severity f.Code = Warning) |> List.length)
+                        "informational", Json.int (corpus.Findings |> List.filter (fun f -> Policy.severity f.Code = Informational) |> List.length) ]
                   "conventions",
                   Json.obj
                       [ "null", Json.str "A null value means the source does not declare it. Other absences are objects with an 'absent' field."

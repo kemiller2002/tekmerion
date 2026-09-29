@@ -15,6 +15,7 @@
     <Compile Include="AdversarialTests.fs" />
     <Compile Include="OutputTests.fs" />
     <Compile Include="SiteTests.fs" />
+    <Compile Include="OperationalTests.fs" />
   </ItemGroup>
 
   <ItemGroup>

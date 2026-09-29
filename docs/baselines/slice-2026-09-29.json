@@ -1,0 +1,39 @@
+{
+  "measuredAt": "2026-09-29T10:15:58.542Z",
+  "machine": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpus": 4,
+    "cpuModel": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "node": "v22.22.2"
+  },
+  "corpus": "tests/fixtures/visual-engineering (visual-engineering@7ef65a3, 23 documents + 55 frontier records)",
+  "runs": 5,
+  "ingestWallMs": {
+    "min": 811,
+    "median": 824,
+    "max": 839,
+    "note": "full process: .NET start-up, read, ingest, render, stage, verify, promote"
+  },
+  "output": {
+    "files": 399,
+    "bytes": 4423214
+  },
+  "indexes": {
+    "manifest": 42911,
+    "artifacts": 67199,
+    "edges": 100909,
+    "findings": 161752
+  },
+  "boundedRetrieval": {
+    "artifact": "RP-COMP-005",
+    "fetches": 2,
+    "bytes": 18022
+  },
+  "browserPayload": {
+    "a/RP-COMP-005/ (html + css, no scripts)": 126858,
+    "p/composition-science/ (html + css)": 143299,
+    "stylesheet": 102460,
+    "scripts": 0
+  }
+}
