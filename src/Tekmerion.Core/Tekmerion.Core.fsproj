@@ -28,6 +28,8 @@
          corpus; a hand-written subset parser would misread them.
          Decision: DF-TEK-2026-0002. -->
     <PackageReference Include="YamlDotNet" Version="18.1.0" />
+    <!-- Pinned so the version does not depend on the installed SDK. -->
+    <PackageReference Update="FSharp.Core" Version="10.1.400" />
   </ItemGroup>
 
   <ItemGroup>
