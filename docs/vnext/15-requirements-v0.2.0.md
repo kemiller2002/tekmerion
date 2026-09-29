@@ -6,6 +6,12 @@ status: draft
 created: 2026-09-17
 updated: 2026-09-17
 supersedes: input-documents/research-publisher-vnext-requirements.txt (unversioned draft, 550b1b9)
+superseded_by: REQ-TEK (docs/requirements/tekmerion-requirements.md, 1.0.0)
+amendments:
+  - date: 2026-09-29
+    author: Claude (anthropic/claude-code), work item GH-13
+    reason: reciprocal supersession link per framework/protocols/SUPERSESSION.md rule 4
+    fields: [superseded_by]
 ---
 
 # Research Publisher vNext — Requirements v0.2.0

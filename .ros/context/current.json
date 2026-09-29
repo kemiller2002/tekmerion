@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "claude",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-09-22T22:12:08.000Z",
+  "updatedAt": "2026-09-29T09:27:04.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -82,6 +82,27 @@
       "telemetryExecutionIds": [
         "EXE-20260922T221209042Z-4ffc8e2d"
       ]
+    },
+    {
+      "id": "GH-13",
+      "type": "feature",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "docs/requirements/tekmerion-requirements.md"
+        },
+        {
+          "type": "tests",
+          "path": "tests/integration/requirements-baseline.test.mjs"
+        }
+      ],
+      "updatedAt": "2026-09-29T09:27:04.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20260929T091922004Z-b57e5b52"
+      ],
+      "completedAt": "2026-09-29T09:27:04.000Z"
     }
   ]
 }
