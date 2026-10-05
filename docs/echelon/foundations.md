@@ -26,7 +26,7 @@ against the systems that own them.
 | --- | --- | --- | --- | --- | --- | --- |
 | ROS / Praxis (compat name) | 3.1.4 | ros-fs 3.1.4 | 3.1.1 → 3.1.4 via `npx --package=@echelon-foundry/repository-operating-system@3.1.4 ros upgrade`. Dry run: 0 conflicts, 3 changes | `./ros status` gives `installed`, `upgradeAvailable: null`. `./ros doctor`: no problems. `./ros validate`: passed | Yes, the repository operating contract | Yes (work protocol, telemetry, CI) |
 | Ordo / SDE | 1.3.0 | npm 1.3.0 | none; npm-current | `npx @echelon-foundry/sde@1.3.0 verify`: passed. One structural review signal, SDE-STRUCT-001 on `tools/ros_cli.mjs` | Yes (doc 18 §5) | Yes, as method. `src/Tekmerion.Domain` follows the tier 1–2 contract (GH-14) |
-| Limen | 0.6.2 | 0.6.2 | 0.6.1 → 0.6.2 via `npx @echelon-foundry/typescript-wasm-kernel@0.6.2 upgrade`. Dry run: 1 change | `verify --strict`: passed. This clears the LIMEN011 failure of the unpinned CI workflow on `main` | Yes, for the interactive browser boundary (TEK-EXP-002) | Not yet: the boundary is empty until #18 |
+| Limen | 0.7.0 | 0.7.0 | 0.6.2 → 0.7.0 via `npx --yes @echelon-foundry/limen@0.7.0 upgrade` (package renamed from `@echelon-foundry/typescript-wasm-kernel`). Dry run: 2 changes; the unedited workflow was rewritten to the pinned form | `verify --strict`: `not-applicable`, exit 0. With the old empty boundary 0.7.0 reports `not-configured` (LIMEN012, exit 8), so `limen.config.json` now declares `boundary.notApplicable` with a rationale | Not yet: no browser or WASM boundary code exists. Applies to the interactive browser boundary (TEK-EXP-002) | No. Replace `notApplicable` with engine and kernel paths when #18 lands |
 | Visual Engineering | 1.0.0 | 1.0.0 | none; current | `verify`: passed | Yes, as a UI validation input (TEK-ACC-003) | Agent context |
 | Communication Engineering | 1.0.0 | upstream source 1.0.0 | none; current. npm has only 0.1.0 (G8) | `verify --strict` (upstream source): ok | Yes, as a validation input for consequential communication | Agent context |
 | Aegis | not installed | — | not yet. `EchelonFoundry.Aegis.Core` 1.0.0 is on NuGet | — | **Required** at F# host boundaries (doc 18 §2) | **Gap.** Adoption is planned with the first Tekmerion host (GH-17 ingestion), because `Tekmerion.Domain` (tiers 1–2) must not reference it. Local backlog WI-0012 |
@@ -48,8 +48,9 @@ against the systems that own them.
   first). An attempt to hand-edit it for consistency was withheld, because
   manual edits to tool configuration are outside the lifecycle mechanism. It
   is recorded as WI-0010 for an owner decision.
-- **`limen-verify.yml` stays unpinned.** It is tool-owned, and pinning it
-  locally would fork a tool-owned file. The gap is recorded against Limen (G7).
+- **`limen-verify.yml` is pinned from Limen 0.7.0.** It is tool-owned; Limen
+  0.7.0 closed G7 upstream, and `upgrade` rewrote the unedited workflow to read
+  `installedVersion` from `.echelon/limen.json` and run that exact version.
 - **Unmerged branches.** Do not merge `work/gh-11-readiness`: its manifest
   records hashes for files it did not commit (inventory §11). Its intended
   outcome, ROS 3.1.4 and Limen 0.6.2, is delivered here through the lifecycle
@@ -67,7 +68,7 @@ them upstream is the next step for someone with access to those repositories.
 | WI-0004 | Praxis | G1: releases ≥ 3.3.0 have no `ros-fs` assets, so the repository launcher returns 404 |
 | WI-0005 | Praxis | G2: the seeded `toolchain.json` pin disagrees with the CLI version |
 | WI-0006 | Praxis | G4: no downgrade guard, and `doctor` recommends the downgrade |
-| WI-0007 | Limen | G7: the tool-owned CI workflow runs an unpinned `verify --strict` |
+| WI-0007 | Limen | G7: the tool-owned CI workflow runs an unpinned `verify --strict`. Resolved by Limen 0.7.0 (pinned workflow) |
 | WI-0008 | Communication Engineering | G8: 1.0.0 is not on npm, and the installed commit is unrecorded |
 | WI-0009 | Folio / Forma | G9/G10: no pinned published release, and Forma 0.3.0 is unpublished |
 | WI-0010 | Tekmerion (owner decision) | `ros.json` `rosVersion` legacy fallback |
