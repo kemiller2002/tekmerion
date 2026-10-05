@@ -1,7 +1,8 @@
 {
   "configurationVersion": 1,
   "boundary": {
-    "engine": [],
-    "kernel": []
+    "notApplicable": {
+      "rationale": "Tekmerion has no browser or WASM boundary code yet: the site is static semantic HTML and the F# code (src/Tekmerion.*) runs as a CLI/host. The interactive browser boundary (TEK-EXP-002) is planned in #18; replace this with engine and kernel paths when that code lands."
+    }
   }
 }
