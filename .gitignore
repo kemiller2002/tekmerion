@@ -23,3 +23,6 @@ TestResults/
 #   npx @echelon-foundry/visual-engineering init
 .visual-engineering/
 # END echelon:visual-engineering
+
+# Praxis transient command locks (never committed)
+.ros/locks/
