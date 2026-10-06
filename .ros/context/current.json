@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-10-06T13:53:27.000Z",
+  "updatedAt": "2026-10-06T13:54:49.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -329,13 +329,47 @@
     {
       "id": "WI-0020",
       "type": "mechanical",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-10-06T13:53:27.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".echelon/toolchain.json"
+        },
+        {
+          "type": "implementation",
+          "path": ".echelon/sde.json"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/praxis-validation.yml"
+        }
+      ],
+      "updatedAt": "2026-10-06T13:54:49.000Z",
       "telemetryExecutionIds": [
         "EXE-20261006T135328288Z-008205ef"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "0c2a6717cde3a6bb5d106514",
+        "recordedAt": "2026-10-06T13:54:48.000Z",
+        "executionId": "EXE-20261006T135328288Z-008205ef",
+        "repository": "research-publisher",
+        "branch": "chore/ordo-1.4.1",
+        "commit": "6775d6f8ec58461c061b9178399de4c590ba2abf",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "chore/ordo-1.4.1",
+        "remoteCommit": "6775d6f8ec58461c061b9178399de4c590ba2abf",
+        "summary": "Ordo 1.4.1 applied, verified, pushed",
+        "nextAction": "complete, PR",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-06T13:54:49.000Z"
     }
   ]
 }
