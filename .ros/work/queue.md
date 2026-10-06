@@ -28,3 +28,4 @@
 | WI-0015 | GH-18 open: Limen interactive layer (F# engine + kernel: copy stable link, in-page relationship filter); boundary currently empty | captured | gh-18 | medium |
 | WI-0016 | GH-18 open: unidentified 11px horizontal overflow at 320px on the project page | captured | gh-18 | medium |
 | WI-0017 | Upgrade Limen to 0.7.1 to match the echelon-current channel | complete |  | medium |
+| WI-0018 | Upgrade Forma to 0.4.1 to match the echelon-current channel | complete |  | medium |

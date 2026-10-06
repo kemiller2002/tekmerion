@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "claude",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-10-06T09:39:40Z",
+  "updatedAt": "2026-10-06T10:04:27Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -259,6 +259,43 @@
         "EXE-20261006T093935279Z-af45b5c7"
       ],
       "completedAt": "2026-10-06T09:39:40Z"
+    },
+    {
+      "id": "WI-0018",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Tekmerion.Core/Site.fs"
+        },
+        {
+          "type": "implementation",
+          "path": "package.json"
+        },
+        {
+          "type": "tests",
+          "path": "tests/Tekmerion.Core.Tests/SiteTests.fs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/e2e/slice-navigation.mjs"
+        },
+        {
+          "type": "documentation",
+          "path": "docs/echelon/foundations.md"
+        },
+        {
+          "type": "decision",
+          "path": "research/decisions/DF-TEK-2026-0003--static-research-experience.md"
+        }
+      ],
+      "updatedAt": "2026-10-06T10:04:27Z",
+      "telemetryExecutionIds": [
+        "EXE-20261006T094757391Z-3a70c595"
+      ],
+      "completedAt": "2026-10-06T10:04:27Z"
     }
   ]
 }

@@ -3,9 +3,9 @@ id: DF-TEK-2026-0003
 title: Static research experience — F# HTML projection, Markdig, pinned Forma, evidence-based redirects
 document_type: decision-record
 status: accepted
-version: "1.0"
+version: "1.1"
 created: 2026-09-29
-updated: 2026-09-29
+updated: 2026-10-06
 work_item: GH-18
 related_documents:
   - docs/architecture/tekmerion-experience.md
@@ -27,9 +27,15 @@ decided_by: Claude (Anthropic, claude-code runtime) executing GH-18; reversible
    Markdig AST: resolvable repository links become site links, `http(s)`/`mailto`
    links are kept with no opener privileges, and everything else becomes
    text.
-3. **Forma 0.2.0, consumed and not copied**: pinned exactly as a dev
-   dependency. The host takes `--forma <all.css>` and emits it unchanged as an
-   asset. Forma 0.3.0 is unpublished (inventory G10).
+3. **Forma, consumed and not copied**: pinned exactly as a dev dependency.
+   The host takes `--forma <all.css>` and emits it unchanged as an asset.
+   Originally Forma 0.2.0 from npm, because 0.3.0 was unpublished (inventory
+   G10). Since WI-0018 (v1.1) the pin is Forma 0.4.1, the `echelon-current`
+   channel version, as its immutable GitHub release tarball. Forma 0.3.0
+   added owl margins (`--ef-stack-space`) to `.ef-stack` on top of its `gap`;
+   the page `main` sets `--ef-stack-space: 0` so `gap` stays the single
+   spacing mechanism, and the 404 page wraps its heading in a `header` like
+   every other page, because the stack now zeroes its children's margins.
 4. **Relative links everywhere**, so the output works under a project Pages
    path, a custom domain, or `file://` without a base-path setting.
 5. **Legacy URLs come from evidence.** The previously published
