@@ -30,3 +30,4 @@
 | WI-0017 | Upgrade Limen to 0.7.1 to match the echelon-current channel | complete |  | medium |
 | WI-0018 | Upgrade Forma to 0.4.1 to match the echelon-current channel | complete |  | medium |
 | WI-0019 | Move tekmerion to Praxis 3.7.1 (ROS -> Praxis rename) and Ordo 1.4.0 | complete | praxis, ordo, toolchain | medium |
+| WI-0020 | Move tekmerion to Ordo 1.4.1 | complete | ordo, toolchain | medium |
