@@ -56,6 +56,12 @@ module SiteTests =
                 Assert.Equal(1, Regex.Matches(html, "<h1[ >]").Count)
 
     [<Fact>]
+    let ``the main stack spaces its children once (Forma 0.3.0+ owl margins zeroed)`` () =
+        for KeyValue(path, html) in pages () do
+            if not (path.StartsWith "research/") then
+                Assert.Contains("<main id=\"main\" class=\"ef-stack\" style=\"--ef-stack-space: 0\">", html)
+
+    [<Fact>]
     let ``every artifact has exactly one page at its stable address`` () =
         for ingested in golden.Force().Artifacts do
             Assert.True((pages ()).ContainsKey(Site.pageOf ingested.Reading.Artifact.Key))

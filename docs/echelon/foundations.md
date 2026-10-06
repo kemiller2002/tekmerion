@@ -30,7 +30,7 @@ against the systems that own them.
 | Visual Engineering | 1.0.0 | 1.0.0 | none; current | `verify`: passed | Yes, as a UI validation input (TEK-ACC-003) | Agent context |
 | Communication Engineering | 1.0.0 | upstream source 1.0.0 | none; current. npm has only 0.1.0 (G8) | `verify --strict` (upstream source): ok | Yes, as a validation input for consequential communication | Agent context |
 | Aegis | not installed | — | not yet. `EchelonFoundry.Aegis.Core` 1.0.0 is on NuGet | — | **Required** at F# host boundaries (doc 18 §2) | **Gap.** Adoption is planned with the first Tekmerion host (GH-17 ingestion), because `Tekmerion.Domain` (tiers 1–2) must not reference it. Local backlog WI-0012 |
-| Forma | not installed | — | not yet. npm 0.2.0 is the only pinnable release | — | **Required** once interactive UI exists (doc 18 §3). Static pages are semantic HTML | Planned for #18 |
+| Forma | 0.4.1 | 0.4.1 | 0.2.0 → 0.4.1 (WI-0018): the dev dependency moved from npm `0.2.0` to the immutable v0.4.1 GitHub release tarball, the `echelon-current` channel version. Migration: `main.ef-stack` sets `--ef-stack-space: 0` (0.3.0 added owl margins on top of `gap`), and the 404 heading sits in a `header` like every other page | Slice pages screenshot-identical to 0.2.0 in light and dark at 1280px and 320px, except the 404 paragraph spacing; axe: no violations in light or dark | Yes. The static pages are Forma-styled (doc 18 §3) | Yes. `--forma node_modules/@echelon-foundry/design-system/dist/all.css` in the slice workflow (GH-18) |
 | Folio | not installed | — | none | — | **Not applicable.** Tekmerion emits no printable, PDF or paginated artifact (doc 18 §4.10, OQ-TEK-012). No pinned release exists either (G9) | No |
 
 ## Decisions and constraints
