@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-10-06T16:30:46Z",
+  "updatedAt": "2026-10-08T07:16:59.386Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -416,6 +416,17 @@
       },
       "completedAt": "2026-10-06T16:30:46Z",
       "conclusion": "Toolchain at praxis 3.7.2 / ordo 1.4.2; conditor.json adopted; verifiers pass."
+    },
+    {
+      "id": "WI-0022",
+      "type": "task",
+      "state": "active",
+      "semanticState": "active",
+      "evidence": [],
+      "updatedAt": "2026-10-08T07:16:59.386Z",
+      "telemetryExecutionIds": [
+        "EXE-20261008T071659994Z-318a18b4"
+      ]
     }
   ]
 }
