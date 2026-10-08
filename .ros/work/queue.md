@@ -32,4 +32,4 @@
 | WI-0019 | Move tekmerion to Praxis 3.7.1 (ROS -> Praxis rename) and Ordo 1.4.0 | complete | praxis, ordo, toolchain | medium |
 | WI-0020 | Move tekmerion to Ordo 1.4.1 | complete | ordo, toolchain | medium |
 | WI-0021 | Move tekmerion to Praxis 3.7.2, Ordo 1.4.2, Visual Engineering 1.0.1 and adopt Conditor | complete |  | medium |
-| WI-0022 | Move tekmerion to Ordo 1.5.0 via echelon-current 1.2.0 (conditor upgrade --current) | ready |  | medium |
+| WI-0022 | Move tekmerion to Ordo 1.5.0 via echelon-current 1.2.0 (conditor upgrade --current) | complete |  | medium |
