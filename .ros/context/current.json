@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-10-06T16:30:46Z",
+  "updatedAt": "2026-10-08T07:26:14.065Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -416,6 +416,60 @@
       },
       "completedAt": "2026-10-06T16:30:46Z",
       "conclusion": "Toolchain at praxis 3.7.2 / ordo 1.4.2; conditor.json adopted; verifiers pass."
+    },
+    {
+      "id": "WI-0022",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "conditor.json"
+        },
+        {
+          "type": "implementation",
+          "path": ".conditor/lock.json"
+        },
+        {
+          "type": "implementation",
+          "path": ".conditor/authority/resolved-release-set.json"
+        },
+        {
+          "type": "implementation",
+          "path": ".echelon/toolchain.json"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/praxis-validation.yml"
+        }
+      ],
+      "updatedAt": "2026-10-08T07:26:14.065Z",
+      "telemetryExecutionIds": [
+        "EXE-20261008T071659994Z-318a18b4"
+      ],
+      "latestCheckpoint": {
+        "id": "1aad29d05a983c48e663e82f",
+        "recordedAt": "2026-10-08T07:26:13.056Z",
+        "executionId": "EXE-20261008T071659994Z-318a18b4",
+        "repository": "research-publisher",
+        "branch": "chore/ordo-1.5.0",
+        "commit": "b996716b1317a28808af1afd776fb1e170f894f3",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "chore/ordo-1.5.0",
+        "remoteCommit": "b996716b1317a28808af1afd776fb1e170f894f3",
+        "summary": "conditor upgrade --current to echelon-current 1.2.0 (Ordo 1.4.2 -> 1.5.0) committed and pushed; local checks passed",
+        "nextAction": "Open the PR, get CI green and merge",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-08T07:26:14.065Z",
+      "conclusion": "Ordo 1.5.0 through echelon-current 1.2.0; local checks passed (log: /tmp/claude-0/-home-user-praxis/7bcb3038-90cc-534e-8e5b-9be62aa1de8c/scratchpad/sweep/logs/tekmerion.log)"
     }
   ]
 }
