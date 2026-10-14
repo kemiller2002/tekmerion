@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-10-14T00:53:32.000Z",
+  "updatedAt": "2026-10-14T09:08:09.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -474,13 +474,51 @@
     {
       "id": "GH-37",
       "type": "task",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-10-14T00:53:32.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/content/parse-document.mjs"
+        },
+        {
+          "type": "implementation",
+          "path": "site/src/pages/search.astro"
+        },
+        {
+          "type": "tests",
+          "path": "tests/ui-conformance/site.conformance.mjs"
+        },
+        {
+          "type": "tests",
+          "path": "docs/ui-conformance/evidence.json"
+        }
+      ],
+      "updatedAt": "2026-10-14T09:08:09.000Z",
       "telemetryExecutionIds": [
         "EXE-20261014T005333400Z-e571e02e"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "8e1cece3d0cf33ae67bbdc50",
+        "recordedAt": "2026-10-14T09:08:08.000Z",
+        "executionId": "EXE-20261014T005333400Z-e571e02e",
+        "repository": "research-publisher",
+        "branch": "feat/ui-conformance-2026-10",
+        "commit": "995e321576c5764ddde5686fd836ac69047e18a8",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "feat/ui-conformance-2026-10",
+        "remoteCommit": "995e321576c5764ddde5686fd836ac69047e18a8",
+        "summary": "Research site fixes (TOC anchors, repo links, overflow, nav, honest search), tests/ui-conformance suite (709/709 passing), blocking CI job, baseline and final evidence",
+        "nextAction": "Complete GH-37, commit Praxis state, open PR and drive CI green",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-14T09:08:09.000Z"
     }
   ]
 }
