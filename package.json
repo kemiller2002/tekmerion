@@ -83,7 +83,8 @@
     "research:migrate": "node ./src/cli/index.mjs migrate --config ./research-publisher.config.mjs",
     "research:build:fixture": "node ./src/cli/index.mjs build --config ./fixtures/alt-research/research-publisher.config.mjs",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
-    "smoke:package": "node ./scripts/smoke-package.mjs"
+    "smoke:package": "node ./scripts/smoke-package.mjs",
+    "ui:conformance": "npm run research:build && npm --prefix tests/ui-conformance run ui:conformance"
   },
   "dependencies": {
     "astro": "^5.12.8",

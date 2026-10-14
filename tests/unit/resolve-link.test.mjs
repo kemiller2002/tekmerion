@@ -50,4 +50,44 @@ describe("resolveDocumentLink", () => {
       resolvedSourcePath: "docs/missing.md"
     });
   });
+
+  it("points unpublished repository files at the configured source repository", () => {
+    const sourceUrl = "https://github.com/example/research/";
+    expect(resolveDocumentLink({
+      sourcePath: "docs/governance/index.md",
+      href: "../../AGENTS.md",
+      documentsBySourcePath,
+      sourceUrl
+    })).toMatchObject({ href: "https://github.com/example/research/blob/HEAD/AGENTS.md", markdown: true, resolved: false });
+
+    expect(resolveDocumentLink({
+      sourcePath: "docs/protocol.md",
+      href: "../schemas/request.schema.json#/properties",
+      documentsBySourcePath,
+      sourceUrl
+    })).toMatchObject({ href: "https://github.com/example/research/blob/HEAD/schemas/request.schema.json#/properties", markdown: false, resolved: true });
+  });
+
+  it("still prefers the published page, and never points outside the repository", () => {
+    expect(resolveDocumentLink({
+      sourcePath: "docs/source.md",
+      href: "target.md",
+      documentsBySourcePath,
+      sourceUrl: "https://github.com/example/research"
+    }).href).toBe("/research/target/");
+
+    expect(resolveDocumentLink({
+      sourcePath: "docs/source.md",
+      href: "../../outside.json",
+      documentsBySourcePath,
+      sourceUrl: "https://github.com/example/research"
+    }).href).toBe("../../outside.json");
+
+    expect(resolveDocumentLink({
+      sourcePath: "docs/source.md",
+      href: "/search/",
+      documentsBySourcePath,
+      sourceUrl: "https://github.com/example/research"
+    }).href).toBe("/search/");
+  });
 });
