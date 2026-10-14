@@ -4,10 +4,6 @@ import DocumentCard from "../components/DocumentCard.astro";
 import { catalog, collections, guides, siteData } from "../utils/data";
 import { withBasePath } from "../utils/paths";
 
-const navItems = [
-  { href: "/search/", label: "Search" },
-  { href: "/collections/artifact-type/", label: "Collections" }
-];
 const recentDocuments = [...catalog.records]
   .sort((left, right) => right.updated.localeCompare(left.updated))
   .slice(0, 6);
@@ -15,7 +11,7 @@ const entryDocuments = Object.values(guides).flat().slice(0, 6);
 const featuredDocuments = entryDocuments.length > 0 ? entryDocuments : recentDocuments;
 ---
 
-<BaseLayout title={siteData.site.title} description={siteData.site.description} site={siteData.site} navItems={navItems}>
+<BaseLayout title={siteData.site.title} description={siteData.site.description} site={siteData.site}>
   <section class="hero">
     <div class="hero__copy">
       <p class="site-kicker">Visual Engineering research archive</p>

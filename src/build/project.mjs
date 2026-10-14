@@ -297,7 +297,8 @@ export async function buildProject({ engineRoot, projectRoot, config, mode = "bu
         sourcePath: document.sourcePath,
         href,
         documentsBySourcePath,
-        baseUrl: config.site.baseUrl
+        baseUrl: config.site.baseUrl,
+        sourceUrl: config.repository?.sourceUrl
       });
       if (resolution.markdown && !resolution.resolved) {
         unresolvedLinkDiagnostics.push({
