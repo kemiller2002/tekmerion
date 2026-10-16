@@ -1,6 +1,7 @@
 {
   "name": "@research-publisher/site",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "license": "PolyForm-Noncommercial-1.0.0"
 }
 

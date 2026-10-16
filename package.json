@@ -103,5 +103,6 @@
   "devDependencies": {
     "@echelon-foundry/design-system": "https://github.com/kemiller2002/forma/releases/download/v0.4.1/echelon-foundry-design-system-0.4.1.tgz",
     "vitest": "^3.2.4"
-  }
+  },
+  "license": "PolyForm-Noncommercial-1.0.0"
 }

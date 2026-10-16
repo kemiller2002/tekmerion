@@ -349,3 +349,9 @@ This repository is the package itself, and also a demo research corpus that the
 package publishes to GitHub Pages. That is why it contains `research/`, a second
 fixture project under `fixtures/` and its own `research-publisher.config.mjs`,
 and why it has `.echelon/tekmerion.json` like any other consumer.
+
+## License
+
+Source available under PolyForm Noncommercial 1.0.0 for permitted noncommercial uses. Commercial use requires a separate license from Echelon Foundry. Previously distributed versions remain subject to the licenses under which they were released.
+
+Commercial licensing information is forthcoming.
