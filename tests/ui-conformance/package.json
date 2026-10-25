@@ -1,0 +1,13 @@
+{
+  "name": "tekmerion-site-ui-conformance",
+  "private": true,
+  "type": "module",
+  "description": "visual-engineering/UI-LAYOUT-INTERACTION@1.0.0 conformance suite for the published research site (site/, built into dist/). Test-only; not part of the npm package.",
+  "scripts": {
+    "ui:conformance": "playwright test && node validate-evidence.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "ajv": "8.17.1"
+  }
+}

@@ -2,16 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { collections, siteData } from "../utils/data";
 
-const navItems = [
-  { href: "/", label: "Overview" },
-  { href: "/collections/artifact-type/", label: "Collections" }
-];
 const artifactTypes = Object.keys(collections.artifactTypes).sort((left, right) => left.localeCompare(right));
 const statuses = Object.keys(collections.statuses).sort((left, right) => left.localeCompare(right));
 const purposes = Object.keys(collections.purposes).sort((left, right) => left.localeCompare(right));
 ---
 
-<BaseLayout title={`Search | ${siteData.site.title}`} description="Full-text research search" site={siteData.site} navItems={navItems}>
+<BaseLayout title={`Search | ${siteData.site.title}`} description="Full-text research search" site={siteData.site}>
   <section class="page-intro">
     <p class="site-kicker">Search</p>
     <h1>Find research quickly</h1>
@@ -46,7 +42,7 @@ const purposes = Object.keys(collections.purposes).sort((left, right) => left.lo
       </label>
       <button class="button" type="submit">Search</button>
     </form>
-    <p id="search-status-line" aria-live="polite"></p>
+    <p id="search-status-line" role="status" aria-label="Search status"></p>
     <div id="search-results" class="search-results"></div>
   </section>
 
@@ -69,8 +65,25 @@ const purposes = Object.keys(collections.purposes).sort((left, right) => left.lo
       return normalizedBase === "/" ? `/${trimmedTarget}` : `${normalizedBase}${trimmedTarget}`;
     }
 
+    // A failed dynamic import stays failed for that URL, so a retry after a
+    // failure asks for a fresh module URL; a loaded index is reused.
+    let pagefindModule = null;
+    let pagefindAttempts = 0;
+
+    function loadPagefind() {
+      if (!pagefindModule) {
+        pagefindAttempts += 1;
+        const url = withBasePath("/pagefind/pagefind.js") + (pagefindAttempts > 1 ? `?attempt=${pagefindAttempts}` : "");
+        pagefindModule = import(url).catch((error) => {
+          pagefindModule = null;
+          throw error;
+        });
+      }
+      return pagefindModule;
+    }
+
     async function runSearch(query, artifactType, status, purpose) {
-      const pagefind = await import(withBasePath("/pagefind/pagefind.js"));
+      const pagefind = await loadPagefind();
       const search = await pagefind.search(query || "");
       const data = await Promise.all(search.results.map((result) => result.data()));
       return data.filter((item) => {
@@ -106,16 +119,41 @@ const purposes = Object.keys(collections.purposes).sort((left, right) => left.lo
       `).join("");
     }
 
+    // Only the latest submission may report: a slower earlier search must
+    // not overwrite the answer to a newer one.
+    let latestSearch = 0;
+
     form?.addEventListener("submit", async (event) => {
       event.preventDefault();
+      const searchId = ++latestSearch;
       const query = document.getElementById("search-query").value;
       const artifactType = document.getElementById("search-artifactType").value;
       const status = document.getElementById("search-status").value;
       const purpose = document.getElementById("search-purpose").value;
       statusLine.textContent = "Searching…";
-      const items = await runSearch(query, artifactType, status, purpose);
-      statusLine.textContent = `${items.length} result${items.length === 1 ? "" : "s"}`;
-      renderResults(items);
+      statusLine.dataset.state = "loading";
+      resultsRoot.setAttribute("aria-busy", "true");
+      try {
+        const items = await runSearch(query, artifactType, status, purpose);
+        if (searchId !== latestSearch) {
+          return;
+        }
+        statusLine.textContent = `${items.length} result${items.length === 1 ? "" : "s"}`;
+        statusLine.dataset.state = "done";
+        renderResults(items);
+      } catch {
+        if (searchId !== latestSearch) {
+          return;
+        }
+        // Never leave "Searching…" standing or show stale results as current.
+        statusLine.textContent = "Search could not load. Try again, or browse the research from Collections.";
+        statusLine.dataset.state = "error";
+        resultsRoot.innerHTML = "";
+      } finally {
+        if (searchId === latestSearch) {
+          resultsRoot.removeAttribute("aria-busy");
+        }
+      }
     });
   </script>
 </BaseLayout>

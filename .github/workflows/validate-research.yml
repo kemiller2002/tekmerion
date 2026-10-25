@@ -36,3 +36,37 @@ jobs:
       - run: npm run research:test
       - run: npm run research:build
       - run: npm run research:build:fixture
+
+  # visual-engineering/UI-LAYOUT-INTERACTION@1.0.0 conformance of the published
+  # research site (issue #37). Blocking: any failing test, schema-invalid
+  # evidence or failing surface/action fails the job. Evidence, results and
+  # traces are uploaded whatever the outcome.
+  ui-conformance:
+    name: UI conformance
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install the conformance suite
+        run: npm ci --prefix tests/ui-conformance
+      - name: Install Chromium for Playwright
+        working-directory: tests/ui-conformance
+        run: npx playwright install --with-deps chromium
+      - name: Run UI conformance
+        run: npm run ui:conformance
+        env:
+          UI_CONFORMANCE_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+          UI_CONFORMANCE_WORKERS: "4"
+      - name: Upload evidence, results and traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-conformance
+          path: tests/ui-conformance/test-results/
+          if-no-files-found: warn
+          retention-days: 30

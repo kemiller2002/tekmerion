@@ -4,14 +4,9 @@ import { withBasePath } from "../utils/paths";
 
 const { document, backlinks = [], related = [], site } = Astro.props;
 const pageTitle = `${document.title} | ${site.title}`;
-const navItems = [
-  { href: "/", label: "Overview" },
-  { href: "/search/", label: "Search" },
-  { href: "/collections/artifact-type/", label: "Collections" }
-];
 ---
 
-<BaseLayout title={pageTitle} description={document.summary || site.description} site={site} navItems={navItems}>
+<BaseLayout title={pageTitle} description={document.summary || site.description} site={site}>
   <article class="document-shell" data-pagefind-body>
     <header class="document-header">
       <p class="eyebrow">
@@ -43,8 +38,8 @@ const navItems = [
         <aside class="toc-panel">
           <h2>On this page</h2>
           <ol>
-            {document.headings.filter((heading) => heading.depth <= 3).map((heading) => (
-              <li><a href={`#${heading.text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{heading.text}</a></li>
+            {document.headings.filter((heading) => heading.depth <= 3 && heading.id).map((heading) => (
+              <li><a href={`#${heading.id}`}>{heading.text}</a></li>
             ))}
           </ol>
         </aside>

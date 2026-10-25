@@ -2,7 +2,15 @@
 import "../styles/index.css";
 import { withBasePath } from "../utils/paths";
 
-const { title, description, site, navItems = [] } = Astro.props;
+// One primary navigation on every page, so a destination never disappears
+// from the header depending on where the reader is; the current page is
+// marked with aria-current instead. `match` widens "current" to a section.
+const PRIMARY_NAV = [
+  { href: "/", label: "Overview" },
+  { href: "/search/", label: "Search" },
+  { href: "/collections/artifact-type/", label: "Collections", match: "/collections/" }
+];
+const { title, description, site, navItems = PRIMARY_NAV } = Astro.props;
 const homeHref = withBasePath(site.baseUrl, "/");
 const siteTitleWords = String(site.title ?? "")
   .trim()
@@ -30,8 +38,8 @@ const basePath = site.baseUrl === "/" ? "" : site.baseUrl.replace(/\/$/, "");
 const currentRoute = basePath && currentPath.startsWith(basePath)
   ? currentPath.slice(basePath.length) || "/"
   : currentPath;
-const isCurrent = (href) => {
-  return href === "/" ? currentRoute === "/" : currentRoute.startsWith(href);
+const isCurrent = ({ href, match = href }) => {
+  return match === "/" ? currentRoute === "/" : currentRoute.startsWith(match);
 };
 ---
 
@@ -58,7 +66,7 @@ const isCurrent = (href) => {
         <nav aria-label="Primary">
           <ul class="site-nav">
             {navItems.map((item) => (
-              <li><a href={withBasePath(site.baseUrl, item.href)} aria-current={isCurrent(item.href) ? "page" : undefined}>{item.label}</a></li>
+              <li><a href={withBasePath(site.baseUrl, item.href)} aria-current={isCurrent(item) ? "page" : undefined}>{item.label}</a></li>
             ))}
           </ul>
         </nav>

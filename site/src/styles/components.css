@@ -11,6 +11,9 @@ button {
   color: var(--color-on-accent);
   text-decoration: none;
   font-weight: 700;
+  /* A long label wraps inside the control rather than pushing past the edge. */
+  max-width: 100%;
+  text-align: center;
 }
 
 .button--secondary {
@@ -125,6 +128,9 @@ button {
 }
 
 .feature-grid article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: var(--space-8) var(--space-8) var(--space-8) 0;
   border-top: 1px solid var(--color-border-strong);
 }
@@ -139,9 +145,15 @@ button {
   color: var(--color-muted);
 }
 
+/* Each column's link sits on the column's bottom edge, so the three peer
+   links align however long each description is (ULI-L10). */
+.feature-grid article p:last-of-type {
+  margin-bottom: var(--space-6);
+}
+
 .feature-grid article a {
   display: inline-block;
-  margin-top: var(--space-6);
+  margin-top: auto;
   font-weight: 700;
 }
 
@@ -161,6 +173,7 @@ button {
 .document-card {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
   padding: var(--space-8) 3.5rem var(--space-8) 0;
   border-top: 1px solid var(--color-border);
@@ -224,7 +237,8 @@ button {
   color: var(--color-muted);
 }
 
-.inline-meta dd {
+.inline-meta dd,
+.metadata-panel dd {
   overflow-wrap: anywhere;
 }
 
@@ -259,6 +273,7 @@ button {
 
 .toc-panel ol {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
   margin-top: var(--space-4);
   padding-left: 1.2rem;
@@ -288,6 +303,11 @@ button {
   background: var(--color-surface);
 }
 
+/* Wide tables scroll inside their own container (wrapped at build time). */
+.document-body .table-scroll {
+  overflow-x: auto;
+}
+
 .document-body pre {
   overflow-x: auto;
   padding: var(--space-6);
@@ -312,6 +332,8 @@ button {
 
 .search-form input,
 .search-form select {
+  width: 100%;
+  min-width: 0;
   min-height: 2.75rem;
   padding: 0.7rem 0.9rem;
   border-radius: 0.75rem;
@@ -334,7 +356,7 @@ select:focus-visible {
 
 @media (min-width: 48rem) {
   .document-card {
-    grid-template-columns: minmax(0, 1.8fr) minmax(18rem, 0.8fr);
+    grid-template-columns: minmax(0, 1.8fr) minmax(min(18rem, 100%), 0.8fr);
   }
 
   .document-card .inline-meta {
@@ -346,8 +368,15 @@ select:focus-visible {
   }
 
   .search-form {
-    grid-template-columns: minmax(15rem, 2fr) repeat(3, minmax(9rem, 1fr)) auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: end;
+  }
+}
+
+/* The single-row filter bar needs room for every field at its minimum. */
+@media (min-width: 64rem) {
+  .search-form {
+    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)) auto;
   }
 }
 
