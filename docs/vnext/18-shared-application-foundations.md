@@ -45,7 +45,7 @@ Forma is the required Echelon presentation system for interactive web applicatio
 1. Interactive browser UI MUST consume the approved pinned `@echelon-foundry/design-system` Forma release.
 2. Application code MUST use existing Forma patterns/components/tokens before creating application-local equivalents.
 3. Forma CSS, patterns, or components MUST NOT be copied or forked into the application merely for convenience or branding.
-4. Consumer markup SHOULD use Forma's documented inert `<ef-*>` authoring wrappers and canonical semantic HTML patterns.
+4. Consumer markup SHOULD use Forma's documented inert `<forma-*>` authoring wrappers and canonical semantic HTML patterns.
 5. Native HTML remains the semantic/accessibility authority. Forma owns presentation; Limen owns non-native browser/application interaction; Ordo/application state owns legal transitions, capabilities, obligations, permissions, and invariants.
 6. Application-specific state or business meaning MUST NOT be moved into Forma components.
 7. Mobile behavior MUST honor Forma's shared responsive contracts, including the 320px baseline. A new responsive need SHOULD be fixed in Forma rather than forked locally.

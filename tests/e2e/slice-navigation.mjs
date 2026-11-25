@@ -39,12 +39,12 @@ try {
   check("package -> originating frontier record", /\/a\/RFR-[0-9A-F]{8}\/$/.test(page.url()), page.url());
   await page.goBack();
 
-  const why = page.locator("details.ef-disclosure").filter({ hasText: "Why is this shown?" }).first();
+  const why = page.locator("details.forma-disclosure").filter({ hasText: "Why is this shown?" }).first();
   await why.locator("summary").click();
   // Since Forma 0.3.0 the disclosure opens with a block-size and
   // content-visibility transition, so its content is rendered (and in
   // innerText) only once the opening has started, not on the click itself.
-  await why.locator(".ef-disclosure__content").waitFor({ state: "visible" });
+  await why.locator(".forma-disclosure__content").waitFor({ state: "visible" });
   const explanation = await why.innerText();
   check("'why is this shown?' names the canonical declaration", /declares source-rep|declares origin-document/.test(explanation), explanation.slice(0, 120));
 

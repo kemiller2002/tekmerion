@@ -77,14 +77,14 @@ module Html =
     /// Forma status lozenge. The label carries the meaning; the state only
     /// adds redundant emphasis, so status never depends on colour alone.
     let lozenge (state: string) (label: string) =
-        el "span" [ "class", "ef-status-lozenge"; "data-state", state ] [ text label ]
+        el "span" [ "class", "forma-status-lozenge"; "data-state", state ] [ text label ]
 
     /// Forma key/value list over a native description list.
     let keyValues (rows: (string * Html) list) =
-        el "dl" [ "class", "ef-key-value-list" ] (rows |> List.map (fun (key, value) -> el "div" [] [ el "dt" [] [ text key ]; el "dd" [] [ value ] ]))
+        el "dl" [ "class", "forma-key-value-list" ] (rows |> List.map (fun (key, value) -> el "div" [] [ el "dt" [] [ text key ]; el "dd" [] [ value ] ]))
 
     let disclosure (summary: string) (children: Html list) =
-        el "details" [ "class", "ef-disclosure" ] [ el "summary" [] [ text summary ]; el "div" [ "class", "ef-disclosure__content" ] children ]
+        el "details" [ "class", "forma-disclosure" ] [ el "summary" [] [ text summary ]; el "div" [ "class", "forma-disclosure__content" ] children ]
 
     /// Relative href from one output page to another, so the site works under
     /// any base path (a project Pages site, a custom domain, or file://).
