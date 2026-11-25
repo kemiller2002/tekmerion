@@ -2,7 +2,10 @@
 //
 //   dotnet run --project src/Tekmerion.Cli -- ingest \
 //     --config tests/fixtures/visual-engineering/tekmerion.config.json \
-//     --out .tmp/site --forma node_modules/@echelon-foundry/design-system/dist/all.css
+//     --out .tmp/site --forma node_modules/@echelon-foundry/design-system/dist/all.css \
+//     --theme node_modules/@echelon-foundry/echelon-theme/dist \
+//     --theme-css echelon.css --theme-css echelon-fonts.css --theme-css echelon-app.css \
+//     --brand echelon
 //   (cd .tmp/site && python3 -m http.server 8765) &
 //   TEKMERION_SITE=http://localhost:8765/ node tests/e2e/slice-navigation.mjs
 //
@@ -57,6 +60,21 @@ try {
   await keyboard.keyboard.press("Tab");
   const first = await keyboard.evaluate(() => document.activeElement?.textContent?.trim());
   check("first Tab reaches the skip link", first === "Skip to content", String(first));
+
+  // Echelon theme (TEK-ECH-006): branded root, every stylesheet and font the
+  // page asks for is served, and the self-hosted fonts actually load.
+  const themed = await browser.newPage();
+  const failed = [];
+  themed.on("response", (response) => { if (response.status() >= 400) failed.push(`${response.status()} ${response.url()}`); });
+  themed.on("requestfailed", (request) => failed.push(`failed ${request.url()}`));
+  await themed.goto(base + "a/RP-COMP-005/", { waitUntil: "load" });
+  const brand = await themed.evaluate(() => document.documentElement.getAttribute("data-forma-brand"));
+  check("pages carry data-forma-brand=echelon", brand === "echelon", String(brand));
+  const sheets = await themed.evaluate(() => [...document.styleSheets].map((s) => s.href?.split("/assets/")[1]));
+  check("Forma then the Echelon theme, in load order", JSON.stringify(sheets) === JSON.stringify(["forma/all.css", "theme/echelon.css", "theme/echelon-fonts.css", "theme/echelon-app.css"]), JSON.stringify(sheets));
+  const loaded = await themed.evaluate(async () => { await document.fonts.ready; return [...document.fonts].filter((f) => f.status === "loaded").map((f) => f.family); });
+  check("self-hosted Echelon fonts load", loaded.length > 0, loaded.join(", "));
+  check("no stylesheet or font request fails", failed.length === 0, failed.join("; "));
 
   for (const path of ["a/EX-COMP-011/", "p/composition-science/", "a/RP-COMP-005/"]) {
     const narrow = await browser.newPage({ viewport: { width: 320, height: 800 } });

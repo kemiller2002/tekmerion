@@ -34,8 +34,15 @@ Every stage is a legal `Publication.apply` transition (GH-14). The run reaches
 
 ```
 tekmerion validate --config tekmerion.config.json [--root DIR] [--json]
-tekmerion ingest   --config tekmerion.config.json [--root DIR] --out DIR [--json]
+tekmerion ingest   --config tekmerion.config.json [--root DIR] --out DIR [--forma CSS]
+                   [--theme DIR --theme-css CSS...] [--brand NAME] [--json]
 ```
+
+`--forma`, `--theme`, `--theme-css` and `--brand` only change presentation; see
+[the experience](tekmerion-experience.md#themes-and-brand-tek-ech-006). An
+unreadable Forma or theme file is an environment failure with the Aegis fault
+`TEKMERION.ASSETS.READ_FAILED` (before 0.2.0 an unreadable `--forma` file was
+reported as `TEKMERION.SOURCE.READ_FAILED`).
 
 Exit codes: `0` success, `1` publication blocked (nothing written), `2` invalid
 arguments, `6` environment failure (an Aegis fault; the previous publication is

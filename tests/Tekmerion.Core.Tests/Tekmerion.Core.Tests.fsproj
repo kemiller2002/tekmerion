@@ -14,7 +14,9 @@
     <Compile Include="GoldenCorpusTests.fs" />
     <Compile Include="AdversarialTests.fs" />
     <Compile Include="OutputTests.fs" />
+    <Compile Include="PresentationTests.fs" />
     <Compile Include="SiteTests.fs" />
+    <Compile Include="ThemeTests.fs" />
     <Compile Include="OperationalTests.fs" />
   </ItemGroup>
 

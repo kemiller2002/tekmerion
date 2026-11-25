@@ -20,7 +20,28 @@ type IngestOptions =
       /// Path to Forma's `all.css` from a pinned
       /// `@echelon-foundry/design-system` release (doc 18 §3).
       Forma: string option
+      /// Directory of a pinned theme release's compiled assets (for example
+      /// `@echelon-foundry/echelon-theme`'s `dist/`), copied verbatim to
+      /// `assets/theme/` so its relative `url()`s resolve (TEK-ECH-006).
+      Theme: string option
+      /// Theme stylesheets to link after Forma, relative to `Theme`, in load
+      /// order (`--theme-css`, repeatable).
+      ThemeStylesheets: string list
+      /// `data-forma-brand` on every page's `<html>` (`--brand`).
+      Brand: string option
       Json: bool }
+
+module IngestOptions =
+
+    let defaults =
+        { ConfigPath = "tekmerion.config.json"
+          Root = None
+          Out = None
+          Forma = None
+          Theme = None
+          ThemeStylesheets = []
+          Brand = None
+          Json = false }
 
 type CommandResult =
     { ExitCode: int
@@ -148,9 +169,10 @@ module Commands =
                 | :? System.Collections.Generic.KeyNotFoundException
                 | :? InvalidOperationException -> Result.Error $"legacy catalog {catalog} is not a research-catalog.json with records[].url/sourcePath"
 
-    let private siteOptions (config: TekmerionConfig) (legacy: (string * string) list) (forma: bool) : SiteOptions =
+    let private siteOptions (config: TekmerionConfig) (legacy: (string * string) list) (presentation: Presentation) : SiteOptions =
         { Title = config.Site.Title |> Option.defaultValue config.Repository
-          FormaStylesheet = if forma then Some "assets/forma/all.css" else None
+          Stylesheets = presentation.Stylesheets
+          Brand = presentation.Brand
           SourceLink =
             fun location ->
                 match config.Site.SourceUrl, location.Commit with
@@ -163,6 +185,55 @@ module Commands =
                     )
                 | _ -> None
           LegacyUrls = legacy }
+
+    /// The host edge of TEK-ECH-006: list the theme directory, plan the
+    /// presentation purely, then read every asset it names. Argument
+    /// problems are exit 2; unreadable assets are environment failures.
+    let presentationAssets (aegis: AegisConfig) (options: IngestOptions) : Result<Presentation * StagedFile list, int * string list> =
+        let cwd = Directory.GetCurrentDirectory()
+
+        let themeFiles =
+            match options.Theme with
+            | None -> Ok None
+            | Some directory when not (Directory.Exists(Path.Combine(cwd, directory))) ->
+                Result.Error(ExitCode.InvalidArguments, [ $"--theme '{directory}' is not a directory" ])
+            | Some directory ->
+                FileSystem.listAssets aegis (Path.Combine(cwd, directory))
+                |> Result.map Some
+                |> Result.mapError (fun fault -> ExitCode.EnvironmentFailure, [ Faults.describe fault ])
+
+        let request files =
+            { Forma = options.Forma.IsSome
+              ThemeFiles = files
+              ThemeStylesheets = options.ThemeStylesheets
+              Brand = options.Brand }
+
+        let read root (source, destination) =
+            FileSystem.readAsset aegis root source
+            |> Result.map (fun bytes -> ({ Path = destination; Bytes = bytes }: StagedFile))
+            |> Result.mapError Faults.describe
+
+        let readAll reads =
+            match reads |> List.choose (function Result.Error message -> Some message | Ok _ -> None) with
+            | [] -> Ok(reads |> List.choose Result.toOption)
+            | messages -> Result.Error(ExitCode.EnvironmentFailure, messages)
+
+        themeFiles
+        |> Result.bind (fun files ->
+            Presentation.plan (request files)
+            |> Result.mapError (fun problems -> ExitCode.InvalidArguments, problems))
+        |> Result.bind (fun presentation ->
+            let forma =
+                options.Forma
+                |> Option.map (fun path -> read cwd (path, Presentation.FormaStylesheet))
+                |> Option.toList
+
+            let theme =
+                options.Theme
+                |> Option.map (fun directory -> presentation.ThemeAssets |> List.map (read (Path.Combine(cwd, directory))))
+                |> Option.defaultValue []
+
+            readAll (forma @ theme) |> Result.map (fun assets -> presentation, assets))
 
     let validate (aegis: AegisConfig) (options: IngestOptions) : CommandResult =
         match load aegis options with
@@ -192,19 +263,11 @@ module Commands =
                   Published = None
                   Messages = messages }
 
-            let formaCss =
-                match options.Forma with
-                | None -> Ok None
-                | Some path ->
-                    FileSystem.readBytes aegis (Directory.GetCurrentDirectory()) path
-                    |> Result.map (fun bytes -> Some(System.Text.Encoding.UTF8.GetString bytes))
-                    |> Result.mapError Faults.describe
-
-            match legacyUrls aegis root config.Site, formaCss with
-            | Result.Error message, _
+            match presentationAssets aegis options, legacyUrls aegis root config.Site with
+            | Result.Error(code, messages), _ -> { (fail code messages) with Corpus = Some corpus }
             | _, Result.Error message -> { (fail ExitCode.EnvironmentFailure [ message ]) with Corpus = Some corpus }
-            | Ok legacy, Ok css ->
-                let pages, lost = Site.render corpus (siteOptions config legacy css.IsSome)
+            | Ok(presentation, assets), Ok legacy ->
+                let pages, lost = Site.render corpus (siteOptions config legacy presentation)
 
                 // A lost published URL is a blocking obligation (TEK-IDY-006).
                 let corpus =
@@ -216,12 +279,7 @@ module Commands =
                 match Assessment.permitsPublication corpus.Assessment with
                 | None -> blocked corpus [ "Publication blocked; the previous publication is unchanged." ]
                 | Some _ ->
-                    let assets =
-                        match css with
-                        | Some text -> [ ({ Path = "assets/forma/all.css"; Text = text }: OutputFile) ]
-                        | None -> []
-
-                    let files = Contracts.project corpus @ pages @ assets
+                    let files = (Contracts.project corpus @ pages |> List.map Output.ofText) @ assets
 
                     match Output.escapingPaths files with
                     | escaping when not escaping.IsEmpty ->
@@ -231,7 +289,7 @@ module Commands =
                         let projected = apply corpus.State (OutputProjected digest)
                         let (ContentDigest digestText) = digest
                         // Host clock (tier 4); the only wall-clock value in the output.
-                        let files = files @ [ Contracts.publicationRecord corpus digestText DateTimeOffset.UtcNow ]
+                        let files = files @ [ Output.ofText (Contracts.publicationRecord corpus digestText DateTimeOffset.UtcNow) ]
 
                         match Output.recover aegis out with
                         | Result.Error fault -> { (fail ExitCode.EnvironmentFailure [ Faults.describe fault ]) with Corpus = Some corpus }

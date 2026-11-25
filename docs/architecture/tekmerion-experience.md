@@ -50,8 +50,8 @@ written, and the exact source location (linked to the pinned commit and line).
 
 ## Forma and Visual Engineering
 
-- Forma `@echelon-foundry/design-system` **0.2.0**, pinned exactly in
-  `package.json`. The stylesheet is copied unmodified from the pinned package
+- Forma `@echelon-foundry/design-system` **1.0.1**, pinned exactly in
+  `package.json` (by release-asset tarball, owned by Conditor). The stylesheet is copied unmodified from the pinned package
   into `assets/forma/all.css` at build time. No Forma CSS is copied into the
   repository and no local stylesheet exists (doc 18 §3).
 - Patterns used: `forma-record-header`, `forma-status-lozenge` (label text always
@@ -60,6 +60,35 @@ written, and the exact source location (linked to the pinned commit and line).
   `forma-cluster`, `forma-stack`, `forma-visually-hidden`.
 - Without `--forma` the pages are unstyled semantic HTML, which is an explicit
   degradation (TEK-ECH-003).
+
+## Themes and brand (TEK-ECH-006)
+
+Forma 1.0 carries no brand; the Echelon look lives in the optional
+`@echelon-foundry/echelon-theme`. Tekmerion's own slice pins **1.1.0** in
+`package.json` (declared in `conditor.json` through Conditor's opt-in) and
+publishes with it:
+
+```bash
+tekmerion ingest --config … --out DIR \
+  --forma node_modules/@echelon-foundry/design-system/dist/all.css \
+  --theme node_modules/@echelon-foundry/echelon-theme/dist \
+  --theme-css echelon.css --theme-css echelon-fonts.css --theme-css echelon-app.css \
+  --brand echelon
+```
+
+| Flag | Effect |
+| --- | --- |
+| `--theme DIR` | Every regular file under `DIR` is copied byte for byte to `assets/theme/`, keeping its relative path, so the theme's relative `url()`s (the self-hosted WOFF2 fonts in `fonts/`, with their OFL texts) resolve. Symbolic links, hidden and system entries are skipped. Requires `--forma`. |
+| `--theme-css CSS` | Repeatable. A stylesheet inside `DIR`, linked after Forma's `all.css` in the order given. The Echelon theme's documented order is `echelon.css`, `echelon-fonts.css`, `echelon-app.css`. At least one is required with `--theme`. |
+| `--brand NAME` | `data-forma-brand="NAME"` on every page's `<html>`. A lowercase token (`a-z`, `0-9`, `-`). Independent of `--theme`. |
+
+The rules are planned purely in `Tekmerion.Core/Presentation.fs`; the CLI only
+lists and reads the files. Every copied path passes the same no-escape check as
+every other output file, and a refused flag is an argument error (exit `2`)
+that leaves the previous publication untouched. Theming changes presentation
+only: page content, addresses and `/data/v1` contracts are identical with or
+without it, and without any flag the output is byte-identical to earlier
+releases. Legacy redirect stubs stay bare.
 
 **Visual Engineering report** (context 1.0.0, source commit `0be73c8`; `verify`
 passed). I read `AGENT-INSTRUCTIONS`, `UI-FOUNDATIONS`,

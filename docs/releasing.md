@@ -30,6 +30,24 @@ package it ships inside, so `--version` cannot drift from the published release
 and no version constant is maintained by hand. The workflow's bump therefore
 takes effect without rebuilding the F# binaries, and step 10 proves it.
 
+## Minor and major releases
+
+The workflow only ever bumps the patch. A minor or major release is prepared in
+a pull request:
+
+1. `npm version <X.Y.0> --no-git-tag-version` (updates `package.json` and the
+   lockfile).
+2. `npm run lifecycle:build && node ./bin/research-publisher.js upgrade` so the
+   repository's own installation record (`.echelon/tekmerion.json`) records the
+   new version through the supported lifecycle, not by hand.
+3. Move `Version.Tekmerion` in `src/Tekmerion.Core/Version.fs` to the same
+   line (`X.Y.0-dev`; the F# engine is not in the package yet).
+4. Add the release to [`CHANGELOG.md`](../CHANGELOG.md).
+
+Merging that pull request to `main` publishes `X.Y.0`, because it is ahead of
+the published version. Later pushes publish `X.Y.1`, `X.Y.2`, … automatically.
+The workflow creates no Git tag.
+
 ## Releasing by hand
 
 Only for an emergency, and it still runs the same gates:

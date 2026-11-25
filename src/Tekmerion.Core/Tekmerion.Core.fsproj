@@ -22,6 +22,7 @@
     <Compile Include="Json.fs" />
     <Compile Include="Contracts.fs" />
     <Compile Include="Html.fs" />
+    <Compile Include="Presentation.fs" />
     <Compile Include="Site.fs" />
   </ItemGroup>
 

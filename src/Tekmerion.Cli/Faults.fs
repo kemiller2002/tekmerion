@@ -20,6 +20,9 @@ module Faults =
     let enumerate config =
         classify "TEKMERION.SOURCE.ENUMERATE_FAILED" InfrastructureFailure FeatureUnavailable ManualIntervention "The research repository could not be listed." config
 
+    let readAssets config =
+        classify "TEKMERION.ASSETS.READ_FAILED" ConfigurationFailure FeatureUnavailable ManualIntervention "A stylesheet or theme asset named on the command line could not be read." config
+
     let writeOutput config =
         classify "TEKMERION.OUTPUT.WRITE_FAILED" InfrastructureFailure FeatureUnavailable AbortOperation "The publication could not be written. The previous publication is unchanged." config
 

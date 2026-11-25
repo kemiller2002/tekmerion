@@ -2,7 +2,7 @@
   "schema": "echelon.tool-installation/1",
   "tool": "tekmerion",
   "package": "@echelon-foundry/research-publisher",
-  "installedVersion": "0.1.0",
+  "installedVersion": "0.2.0",
   "configurationVersion": 3,
   "managedArtifacts": [
     {

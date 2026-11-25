@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "research-publisher",
-  "nextSeq": 27,
+  "nextSeq": 28,
   "items": [
     {
       "id": "WI-0001",
@@ -461,6 +461,27 @@
       "attachments": [],
       "createdAt": "2026-11-25T18:13:06.921Z",
       "updatedAt": "2026-11-25T18:33:39.000Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "anthropic/claude-code",
+        "provider": "anthropic",
+        "model": "unknown",
+        "runtime": "claude-code"
+      },
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0027",
+      "title": "Echelon theme support in tekmerion ingest (--theme/--theme-css/--brand) and adopt echelon-theme 1.1.0 in the slice; minor release 0.2.0",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-11-25T20:37:42.850Z",
+      "updatedAt": "2026-11-25T20:51:12Z",
       "createdBy": "unknown",
       "createdByActor": {
         "kind": "agent",

@@ -16,6 +16,10 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const cli = path.join(root, "src/Tekmerion.Cli/bin/Release/net8.0/tekmerion.dll");
 const config = path.join(root, "tests/fixtures/visual-engineering/tekmerion.config.json");
 const forma = path.join(root, "node_modules/@echelon-foundry/design-system/dist/all.css");
+// The published configuration: Forma, then the Echelon theme (TEK-ECH-006).
+const theme = path.join(root, "node_modules/@echelon-foundry/echelon-theme/dist");
+const themeCss = ["echelon.css", "echelon-fonts.css", "echelon-app.css"];
+const themeArgs = ["--theme", theme, ...themeCss.flatMap((css) => ["--theme-css", css]), "--brand", "echelon"];
 const runs = Number(process.argv[2] ?? 5);
 const out = fs.mkdtempSync(path.join(os.tmpdir(), "tekmerion-baseline-"));
 
@@ -31,7 +35,7 @@ const fileCount = (dir) =>
 const durations = [];
 for (let run = 0; run < runs; run++) {
   const start = process.hrtime.bigint();
-  execFileSync("dotnet", [cli, "ingest", "--config", config, "--out", path.join(out, "site"), "--forma", forma, "--json"], { stdio: ["ignore", "ignore", "ignore"] });
+  execFileSync("dotnet", [cli, "ingest", "--config", config, "--out", path.join(out, "site"), "--forma", forma, ...themeArgs, "--json"], { stdio: ["ignore", "ignore", "ignore"] });
   durations.push(Number(process.hrtime.bigint() - start) / 1e6);
 }
 
@@ -58,6 +62,8 @@ console.log(
         "a/RP-COMP-005/ (html + css, no scripts)": site("a/RP-COMP-005/index.html") + site("assets/forma/all.css"),
         "p/composition-science/ (html + css)": site("p/composition-science/index.html") + site("assets/forma/all.css"),
         stylesheet: site("assets/forma/all.css"),
+        themeStylesheets: themeCss.reduce((sum, css) => sum + site(path.join("assets/theme", css)), 0),
+        fontsAvailable: treeBytes(path.join(out, "site/assets/theme/fonts")),
         scripts: 0,
       },
     },

@@ -166,7 +166,7 @@ listed in the checked sections must be present.
 | --- | --- | --- |
 | doc18 §1 normative scope | incorporated by reference | TEK-ECH-001, TEK-ECH-004 |
 | doc18 §2 Aegis | incorporated by reference | TEK-ECH-001 |
-| doc18 §3 Forma | incorporated by reference | TEK-ECH-001, TEK-EXP-003 |
+| doc18 §3 Forma | incorporated by reference | TEK-ECH-001, TEK-EXP-003, TEK-ECH-006 |
 | doc18 §4 Folio | incorporated; not yet applicable | TEK-ECH-001, OQ-TEK-012 |
 | doc18 §6 definition of done | incorporated by reference | TEK-ECH-001 |
 

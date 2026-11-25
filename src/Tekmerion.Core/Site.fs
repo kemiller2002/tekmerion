@@ -12,9 +12,13 @@ open Tekmerion.Core.Html
 
 type SiteOptions =
     { Title: string
-      /// Output-relative path of the Forma stylesheet, when the host supplies
-      /// one. Without it pages remain readable semantic HTML (TEK-ECH-003).
-      FormaStylesheet: string option
+      /// Output-relative stylesheets in load order (Forma, then any theme),
+      /// when the host supplies them. Without any, pages remain readable
+      /// semantic HTML (TEK-ECH-003).
+      Stylesheets: string list
+      /// `data-forma-brand` on `<html>`, when the host names a brand
+      /// (TEK-ECH-006). Purely presentational.
+      Brand: string option
       /// Builds a link to a source location, when a pinned revision is known.
       SourceLink: SourceLocation -> string option
       /// Previously published URL paths (relative to the old base path) and
@@ -131,17 +135,19 @@ module Site =
     // ------------------------------------------------------------------
 
     let private layout (ctx: Context) (page: string) (title: string) (main: Html list) =
-        let stylesheet =
-            match ctx.Options.FormaStylesheet with
-            | Some css -> VoidElement("link", [ "rel", "stylesheet"; "href", relative page css ])
-            | None -> empty
+        let stylesheets =
+            ctx.Options.Stylesheets
+            |> List.map (fun css -> VoidElement("link", [ "rel", "stylesheet"; "href", relative page css ]))
 
-        el "html" [ "lang", "en" ] [
+        let brand =
+            ctx.Options.Brand |> Option.map (fun name -> "data-forma-brand", name) |> Option.toList
+
+        el "html" ([ "lang", "en" ] @ brand) [
             el "head" [] [
                 VoidElement("meta", [ "charset", "utf-8" ])
                 VoidElement("meta", [ "name", "viewport"; "content", "width=device-width, initial-scale=1" ])
                 el "title" [] [ text $"{title} · {ctx.Options.Title}" ]
-                stylesheet
+                Fragment stylesheets
                 VoidElement("link", [ "rel", "alternate"; "type", "application/json"; "href", relative page "data/v1/manifest.json" ])
             ]
             el "body" [] [

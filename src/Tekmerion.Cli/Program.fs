@@ -12,7 +12,8 @@ module Program =
 
 Usage:
   tekmerion validate --config PATH [--root DIR] [--json]
-  tekmerion ingest   --config PATH [--root DIR] --out DIR [--forma CSS] [--json]
+  tekmerion ingest   --config PATH [--root DIR] --out DIR [--forma CSS]
+                     [--theme DIR --theme-css CSS...] [--brand NAME] [--json]
   tekmerion --version
 
   validate  discover, parse, type, validate and resolve; write nothing
@@ -21,6 +22,12 @@ Usage:
             --forma names Forma's all.css from a pinned
             @echelon-foundry/design-system release; without it pages are
             unstyled semantic HTML
+            --theme names a pinned theme's compiled directory (for example
+            node_modules/@echelon-foundry/echelon-theme/dist); it is copied
+            to DIR/assets/theme/ and requires --forma. Each --theme-css
+            (repeatable, relative to --theme) is linked after Forma, in the
+            order given. --brand sets data-forma-brand on every page, for
+            example --brand echelon
 
 Exit codes: 0 success, 1 publication blocked, 2 invalid arguments,
 6 environment failure. --json writes one JSON document to stdout."""
@@ -33,6 +40,9 @@ Exit codes: 0 success, 1 publication blocked, 2 invalid arguments,
         | "--out" :: value :: rest -> parseOptions rest { options with Out = Some value }
         | "--json" :: rest -> parseOptions rest { options with Json = true }
         | "--forma" :: value :: rest -> parseOptions rest { options with Forma = Some value }
+        | "--theme" :: value :: rest -> parseOptions rest { options with Theme = Some value }
+        | "--theme-css" :: value :: rest -> parseOptions rest { options with ThemeStylesheets = options.ThemeStylesheets @ [ value ] }
+        | "--brand" :: value :: rest -> parseOptions rest { options with Brand = Some value }
         | unknown :: _ -> Error $"unknown argument '{unknown}'"
 
     let private summary (command: string) (result: CommandResult) =
@@ -111,7 +121,7 @@ Exit codes: 0 success, 1 publication blocked, 2 invalid arguments,
         // Blocking persistence: a short-lived CLI must not exit before its
         // fault events are written.
         let aegis = { Aegis.configure "Tekmerion" (Some Version.Tekmerion) [ Sinks.standardError ] with Persistence = PersistenceMode.Blocking }
-        let defaults = { ConfigPath = "tekmerion.config.json"; Root = None; Out = None; Forma = None; Json = false }
+        let defaults = IngestOptions.defaults
 
         match List.ofArray argv with
         | [ "--version" ] ->

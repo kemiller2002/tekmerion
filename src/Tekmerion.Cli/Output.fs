@@ -13,6 +13,11 @@ type PublishOutcome =
       Bytes: int64
       Recovered: string list }
 
+/// A file exactly as it is written. Generated text is UTF-8 without a BOM;
+/// host-supplied assets (Forma, theme stylesheets and fonts) are copied
+/// byte for byte.
+type StagedFile = { Path: string; Bytes: byte array }
+
 /// Staged, verified, atomically promoted output (TEK-PUB-003, TEK-REC-002).
 ///
 /// Files are written to `<out>.tekmerion-staging`, re-read and verified, then
@@ -28,15 +33,17 @@ module Output =
 
     let private utf8 = UTF8Encoding(false)
 
+    let ofText (file: OutputFile) : StagedFile = { Path = file.Path; Bytes = utf8.GetBytes file.Text }
+
     /// Digest of the whole output tree: SHA-256 over sorted (path, sha256).
-    let digest (files: OutputFile list) =
+    let digest (files: StagedFile list) =
         files
         |> List.sortBy (fun f -> f.Path)
-        |> List.map (fun f -> $"{f.Path}\u0000{Hashing.sha256Bytes (utf8.GetBytes f.Text)}")
+        |> List.map (fun f -> $"{f.Path}\u0000{Hashing.sha256Bytes f.Bytes}")
         |> fun lines -> ContentDigest("sha256:" + Hashing.sha256Text (String.Join("\n", lines)))
 
     /// Returns the paths that would escape the output root (blocking).
-    let escapingPaths (files: OutputFile list) =
+    let escapingPaths (files: StagedFile list) =
         files
         |> List.filter (fun f ->
             match RepoPath.create f.Path with
@@ -62,7 +69,7 @@ module Output =
                   Directory.Delete(staging, true)
                   "discarded incomplete staging output" ])
 
-    let stage (config: AegisConfig) (out: string) (files: OutputFile list) : Guarded<int64> =
+    let stage (config: AegisConfig) (out: string) (files: StagedFile list) : Guarded<int64> =
         let scope = Aegis.scope config "Tekmerion.Output.Stage" (Map [ "out", Internal out ])
 
         Aegis.capture config scope (Faults.writeOutput config) (fun () ->
@@ -74,15 +81,14 @@ module Output =
                 |> List.sumBy (fun file ->
                     let target = Path.Combine(staging, file.Path)
                     Directory.CreateDirectory(Path.GetDirectoryName target) |> ignore
-                    let bytes = utf8.GetBytes file.Text
-                    File.WriteAllBytes(target, bytes)
-                    int64 bytes.Length)
+                    File.WriteAllBytes(target, file.Bytes)
+                    int64 file.Bytes.Length)
 
             // Verify what is on disk before it can become the publication.
             for file in files do
                 let onDisk = File.ReadAllBytes(Path.Combine(staging, file.Path))
 
-                if Hashing.sha256Bytes onDisk <> Hashing.sha256Bytes (utf8.GetBytes file.Text) then
+                if Hashing.sha256Bytes onDisk <> Hashing.sha256Bytes file.Bytes then
                     raise (IOException $"staged file {file.Path} does not match what was written")
 
             written)
