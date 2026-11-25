@@ -54,10 +54,10 @@ written, and the exact source location (linked to the pinned commit and line).
   `package.json`. The stylesheet is copied unmodified from the pinned package
   into `assets/forma/all.css` at build time. No Forma CSS is copied into the
   repository and no local stylesheet exists (doc 18 §3).
-- Patterns used: `ef-record-header`, `ef-status-lozenge` (label text always
-  carries the meaning), `ef-key-value-list`, `ef-provenance-trail`,
-  `ef-disclosure`, `ef-obligation-panel`/`ef-obligation`, `ef-data-grid`,
-  `ef-cluster`, `ef-stack`, `ef-visually-hidden`.
+- Patterns used: `forma-record-header`, `forma-status-lozenge` (label text always
+  carries the meaning), `forma-key-value-list`, `forma-provenance-trail`,
+  `forma-disclosure`, `forma-obligation-panel`/`forma-obligation`, `forma-data-grid`,
+  `forma-cluster`, `forma-stack`, `forma-visually-hidden`.
 - Without `--forma` the pages are unstyled semantic HTML, which is an explicit
   degradation (TEK-ECH-003).
 

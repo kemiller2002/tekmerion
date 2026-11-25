@@ -59,7 +59,7 @@ module SiteTests =
     let ``the main stack spaces its children once (Forma 0.3.0+ owl margins zeroed)`` () =
         for KeyValue(path, html) in pages () do
             if not (path.StartsWith "research/") then
-                Assert.Contains("<main id=\"main\" class=\"ef-stack\" style=\"--ef-stack-space: 0\">", html)
+                Assert.Contains("<main id=\"main\" class=\"forma-stack\" style=\"--forma-stack-space: 0\">", html)
 
     [<Fact>]
     let ``every artifact has exactly one page at its stable address`` () =

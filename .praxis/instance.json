@@ -1,0 +1,12 @@
+{
+  "schema": "praxis.instance/1",
+  "instanceId": "pxi-574b1728577c423a962a63b0f1f817ce",
+  "createdAt": "2026-11-25T18:16:56.870Z",
+  "createdWith": "3.25.0",
+  "repository": {
+    "provider": "github",
+    "repositoryId": null,
+    "repository": "kemiller2002/tekmerion"
+  },
+  "predecessors": []
+}
