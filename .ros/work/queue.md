@@ -36,4 +36,4 @@
 | WI-0023 | Upgrade Aegis 1.0.0 -> 2.0.0 (echelon-current 1.40.0) | complete |  | medium |
 | WI-0024 | Pin the Playwright slice job to ubuntu-24.04 (Playwright 1.56.1 has no ubuntu 26.04 support) | complete |  | medium |
 | WI-0025 | Move Aegis 2.0.1 pins to 2.0.2 (WebAssembly detached-capture hang fix) | complete |  | medium |
-| WI-0026 | Upgrade to echelon-current 1.42.0 (Praxis 3.25.0, Ordo 1.20.0, Forma 1.0.1, Limen 0.9.1) | ready |  | medium |
+| WI-0026 | Upgrade to echelon-current 1.42.0 (Praxis 3.25.0, Ordo 1.20.0, Forma 1.0.1, Limen 0.9.1) | complete |  | medium |
