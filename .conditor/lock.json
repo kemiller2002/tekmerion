@@ -1,7 +1,7 @@
 {
   "schemaVersion": 4,
   "project": "tekmerion",
-  "manifestSha256": "15f76efc3586e73b0367a5dc00aa74d4a71575066be4284d401cd36598c8d595",
+  "manifestSha256": "623eb8a085be8e52a1db221baf37c98c11a41bb7192c9d44db7f060f857d7166",
   "manifest": {
     "schemaVersion": 1,
     "name": "tekmerion",
@@ -29,6 +29,11 @@
       {
         "id": "forma",
         "version": "1.0.1",
+        "required": true
+      },
+      {
+        "id": "echelon-theme",
+        "version": "1.1.0",
         "required": true
       }
     ],
@@ -73,6 +78,15 @@
       "descriptorSha256": "8f57f88e60ee9e5284c60304a91e3c45c967f059c7123cb646e15f74062212bd",
       "authority": "embedded-component-descriptor",
       "sourceReference": "npm:@echelon-foundry/design-system@1.0.1"
+    },
+    {
+      "id": "echelon-theme",
+      "version": "1.1.0",
+      "distribution": "npm",
+      "package": "@echelon-foundry/echelon-theme",
+      "descriptorSha256": "3336ffb25552513f681d560211c9745abd4fbce4e7cd836feb48b1fe3274e24a",
+      "authority": "embedded-component-descriptor",
+      "sourceReference": "npm:@echelon-foundry/echelon-theme@1.1.0"
     }
   ],
   "requirements": [],
