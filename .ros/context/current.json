@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-10-08T07:26:14.065Z",
+  "updatedAt": "2026-11-25T15:56:44Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -470,6 +470,131 @@
       },
       "completedAt": "2026-10-08T07:26:14.065Z",
       "conclusion": "Ordo 1.5.0 through echelon-current 1.2.0; local checks passed (log: /tmp/claude-0/-home-user-praxis/7bcb3038-90cc-534e-8e5b-9be62aa1de8c/scratchpad/sweep/logs/tekmerion.log)"
+    },
+    {
+      "id": "WI-0023",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Tekmerion.Cli/Tekmerion.Cli.fsproj"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/tekmerion-slice.yml"
+        }
+      ],
+      "updatedAt": "2026-11-25T13:02:05.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T122345036Z-d0f1da6c"
+      ],
+      "latestCheckpoint": {
+        "id": "c0187cc8e61409d35112b79e",
+        "recordedAt": "2026-11-25T13:02:04.000Z",
+        "executionId": "EXE-20261125T122345036Z-d0f1da6c",
+        "repository": "research-publisher",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "8639300c724f7eaaafa68b51127eb7b5c1d4543a",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "8639300c724f7eaaafa68b51127eb7b5c1d4543a",
+        "summary": "Aegis pin retargeted 2.0.0 -> 2.0.1 and pushed; build clean on SDK 10.0.404 and 11.0.100; 289 tests passed",
+        "nextAction": "Complete WI-0023, rebuild registry, validate, push Praxis state",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "blockReason": "Waiting on Aegis 2.0.1: Aegis 2.0.0 requires FSharp.Core >= 11.0.101, causing NU1605 restore failure",
+      "completedAt": "2026-11-25T13:02:05.000Z",
+      "conclusion": "Aegis.Core pinned at 2.0.1; restore resolves FSharp.Core 10.1.400; builds clean on SDK 10 and 11; 289 tests pass"
+    },
+    {
+      "id": "WI-0024",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".github/workflows/tekmerion-slice.yml"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/tekmerion-slice.yml"
+        }
+      ],
+      "updatedAt": "2026-11-25T15:27:06.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T152650904Z-30f2ddae"
+      ],
+      "latestCheckpoint": {
+        "id": "6b502ebdb0cde2587c397feb",
+        "recordedAt": "2026-11-25T15:27:00.000Z",
+        "executionId": "EXE-20261125T152650904Z-30f2ddae",
+        "repository": "research-publisher",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "fafc2183d0e8bf6c159e78ab9a87db24f2e2d11d",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "fafc2183d0e8bf6c159e78ab9a87db24f2e2d11d",
+        "summary": "slice job pinned to ubuntu-24.04 with a one-line reason; praxis validate passed",
+        "nextAction": "Confirm PR #39 slice job passes",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-25T15:27:06.000Z"
+    },
+    {
+      "id": "WI-0025",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Tekmerion.Cli/Tekmerion.Cli.fsproj"
+        },
+        {
+          "type": "tests",
+          "path": "src/Tekmerion.Cli/Tekmerion.Cli.fsproj"
+        }
+      ],
+      "updatedAt": "2026-11-25T15:56:44Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T153950902Z-11511ca0"
+      ],
+      "latestCheckpoint": {
+        "id": "7578da48dfd0bfa7141a61f9",
+        "recordedAt": "2026-11-25T15:56:44Z",
+        "executionId": "EXE-20261125T153950902Z-11511ca0",
+        "repository": "research-publisher",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "e662b8c1cfaa5a244bf6caa3ce29ecca59d3398d",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "e662b8c1cfaa5a244bf6caa3ce29ecca59d3398d",
+        "summary": "Aegis pins at 2.0.2; builds 0 warnings on SDK 10 and 11; tests pass",
+        "nextAction": "Merge after review",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-25T15:56:44Z"
     }
   ]
 }
