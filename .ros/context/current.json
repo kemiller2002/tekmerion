@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-11-25T15:39:50.000Z",
+  "updatedAt": "2026-11-25T15:56:44Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -558,13 +558,43 @@
     {
       "id": "WI-0025",
       "type": "task",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-11-25T15:39:50.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Tekmerion.Cli/Tekmerion.Cli.fsproj"
+        },
+        {
+          "type": "tests",
+          "path": "src/Tekmerion.Cli/Tekmerion.Cli.fsproj"
+        }
+      ],
+      "updatedAt": "2026-11-25T15:56:44Z",
       "telemetryExecutionIds": [
         "EXE-20261125T153950902Z-11511ca0"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "7578da48dfd0bfa7141a61f9",
+        "recordedAt": "2026-11-25T15:56:44Z",
+        "executionId": "EXE-20261125T153950902Z-11511ca0",
+        "repository": "research-publisher",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "e662b8c1cfaa5a244bf6caa3ce29ecca59d3398d",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "e662b8c1cfaa5a244bf6caa3ce29ecca59d3398d",
+        "summary": "Aegis pins at 2.0.2; builds 0 warnings on SDK 10 and 11; tests pass",
+        "nextAction": "Merge after review",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-25T15:56:44Z"
     }
   ]
 }
