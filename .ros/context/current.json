@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-11-25T12:56:10.000Z",
+  "updatedAt": "2026-11-25T13:02:05.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -474,34 +474,45 @@
     {
       "id": "WI-0023",
       "type": "task",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-11-25T12:56:10.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "src/Tekmerion.Cli/Tekmerion.Cli.fsproj"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/tekmerion-slice.yml"
+        }
+      ],
+      "updatedAt": "2026-11-25T13:02:05.000Z",
       "telemetryExecutionIds": [
         "EXE-20261125T122345036Z-d0f1da6c"
       ],
       "latestCheckpoint": {
-        "id": "992a3f62bb48178691b5a29b",
-        "recordedAt": "2026-11-25T12:31:22.000Z",
+        "id": "c0187cc8e61409d35112b79e",
+        "recordedAt": "2026-11-25T13:02:04.000Z",
         "executionId": "EXE-20261125T122345036Z-d0f1da6c",
         "repository": "research-publisher",
         "branch": "claude/vigila-implementation-jdeps1",
-        "commit": "1e2b742cb71f89fb06b28d6050a4eb4f3ce1135d",
+        "commit": "8639300c724f7eaaafa68b51127eb7b5c1d4543a",
         "remote": {
           "name": "origin",
           "url": "https://github.com/kemiller2002/tekmerion"
         },
         "remoteBranch": "claude/vigila-implementation-jdeps1",
-        "remoteCommit": "1e2b742cb71f89fb06b28d6050a4eb4f3ce1135d",
-        "summary": "Aegis.Core pin bumped to 2.0.0; restore fails NU1605 on SDK 10 and 11 because the Aegis 2.0.0 nuspec requires FSharp.Core >= 11.0.101 (known 2.0.0 packaging defect)",
-        "nextAction": "Retarget the pin to Aegis 2.0.1 when it is released, rerun npm run lifecycle:test, then complete",
+        "remoteCommit": "8639300c724f7eaaafa68b51127eb7b5c1d4543a",
+        "summary": "Aegis pin retargeted 2.0.0 -> 2.0.1 and pushed; build clean on SDK 10.0.404 and 11.0.100; 289 tests passed",
+        "nextAction": "Complete WI-0023, rebuild registry, validate, push Praxis state",
         "verification": {
           "status": "verified",
           "mechanism": "git-remote-observation"
         }
       },
-      "blockReason": "Waiting on Aegis 2.0.1: Aegis 2.0.0 requires FSharp.Core >= 11.0.101, causing NU1605 restore failure"
+      "blockReason": "Waiting on Aegis 2.0.1: Aegis 2.0.0 requires FSharp.Core >= 11.0.101, causing NU1605 restore failure",
+      "completedAt": "2026-11-25T13:02:05.000Z",
+      "conclusion": "Aegis.Core pinned at 2.0.1; restore resolves FSharp.Core 10.1.400; builds clean on SDK 10 and 11; 289 tests pass"
     }
   ]
 }
