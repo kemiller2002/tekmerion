@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-11-25T15:27:06.000Z",
+  "updatedAt": "2026-11-25T15:39:50.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -554,6 +554,17 @@
         }
       },
       "completedAt": "2026-11-25T15:27:06.000Z"
+    },
+    {
+      "id": "WI-0025",
+      "type": "task",
+      "state": "active",
+      "semanticState": "active",
+      "evidence": [],
+      "updatedAt": "2026-11-25T15:39:50.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T153950902Z-11511ca0"
+      ]
     }
   ]
 }
