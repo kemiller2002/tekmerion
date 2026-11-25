@@ -26,8 +26,17 @@ where every derived relationship explains itself. See
 ```bash
 dotnet run --project src/Tekmerion.Cli -- ingest \
   --config tests/fixtures/visual-engineering/tekmerion.config.json \
-  --out .tmp/site --forma node_modules/@echelon-foundry/design-system/dist/all.css
+  --out .tmp/site --forma node_modules/@echelon-foundry/design-system/dist/all.css \
+  --theme node_modules/@echelon-foundry/echelon-theme/dist \
+  --theme-css echelon.css --theme-css echelon-fonts.css --theme-css echelon-app.css \
+  --brand echelon
 ```
+
+`--forma` styles the pages with Forma; `--theme`, `--theme-css` and `--brand`
+optionally layer a pinned theme (here the Echelon theme 1.1.0) and set
+`data-forma-brand` (TEK-ECH-006). Every flag is optional: without them the
+pages are readable, unstyled semantic HTML. See
+[`docs/architecture/tekmerion-experience.md`](docs/architecture/tekmerion-experience.md#themes-and-brand-tek-ech-006).
 
 ### Legacy publisher and lifecycle
 

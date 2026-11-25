@@ -20,6 +20,9 @@ is renamed — see OQ-TEK-014 in `docs/requirements/open-questions.md`).
 
 The new F# Tekmerion engine (`tekmerion validate|ingest`, `src/Tekmerion.Cli`)
 is not yet part of the npm package; see `docs/architecture/tekmerion-ingestion.md`.
+Its `ingest` publishes with Forma (`--forma`) and, optionally, a pinned theme
+and brand (`--theme`, `--theme-css`, `--brand`; see
+`docs/architecture/tekmerion-experience.md`).
 
 ## Global options
 

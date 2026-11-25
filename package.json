@@ -1,6 +1,6 @@
 {
   "name": "@echelon-foundry/research-publisher",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Tekmerion (formerly Research Publisher): evidence-faithful research ingestion, validation and publication, plus repository initialization, verification, diagnostics and upgrade tooling.",
   "repository": {
     "type": "git",

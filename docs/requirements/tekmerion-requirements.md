@@ -1,10 +1,10 @@
 ---
 id: REQ-TEK
 title: Tekmerion Canonical Requirements
-version: 1.1.0
+version: 1.2.0
 status: accepted-baseline
 created: 2026-09-29
-updated: 2026-09-29
+updated: 2026-11-25
 owners:
   - tekmerion-product
 work_item: GH-13
@@ -609,6 +609,15 @@ contract first.
 - **TEK-ECH-005** `now` — Praxis naming is used once the repository
   operating-system CLI migration is available through its lifecycle; until
   then the supported `ros` executable is used. *(#11 §20)*
+- **TEK-ECH-006** `now` — The host may layer a pinned Forma theme (for
+  Echelon, `@echelon-foundry/echelon-theme`) over Forma: its compiled assets
+  are copied byte for byte under the publication, its stylesheets load after
+  Forma in the order the host gives, and a brand sets `data-forma-brand` on
+  every page. Theming changes presentation only: content, addresses and
+  `/data/v1` contracts are identical with or without it, and pages stay
+  readable semantic HTML without any stylesheet (TEK-ECH-003). Copied paths
+  obey the same no-escape rule as every other output file. *(doc 18 §3,
+  EDS-ADR-002)*
 
 ## 22. Testing — `TST`
 
@@ -667,4 +676,5 @@ else.
 | Version | Date | Change | Work item |
 | --- | --- | --- | --- |
 | 1.0.0 | 2026-09-29 | Canonical baseline reconciling REQ-RP-VNEXT 0.2.0, the original draft, #11 and doc 18 | GH-13 |
+| 1.2.0 | 2026-11-25 | TEK-ECH-006 added: optional theme layered over Forma (Echelon theme 1.1.0), with `data-forma-brand` | WI-0027 |
 | 1.1.0 | 2026-09-29 | TEK-REL-001 amended with the explicit link keys observed in the slice corpus (`related_artifacts`, `related_theory`, `tests`) and the declared direction of frontier origin links; DF-TEK-2026-0002 | GH-17 |

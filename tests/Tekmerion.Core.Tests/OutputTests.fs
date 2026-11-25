@@ -11,7 +11,7 @@ module OutputTests =
 
     let aegis () = fst (quietAegis ())
 
-    let file relative text : Tekmerion.Core.OutputFile = { Path = relative; Text = text }
+    let file relative text : StagedFile = Output.ofText { Path = relative; Text = text }
 
     let expectOk result =
         match result with
@@ -58,7 +58,7 @@ module OutputTests =
         File.WriteAllText(Path.Combine(root, "content/projects/p/research-note/b.md"), "---\nid: DUP-1\n---\n")
         File.WriteAllText(Path.Combine(root, "tekmerion.config.json"), """{"schemaVersion":1,"repository":"example/research","include":["content/**/*.md"]}""")
 
-        let result = Commands.ingest (aegis ()) { ConfigPath = Path.Combine(root, "tekmerion.config.json"); Root = None; Out = Some out; Forma = None; Json = true }
+        let result = Commands.ingest (aegis ()) { IngestOptions.defaults with ConfigPath = Path.Combine(root, "tekmerion.config.json"); Out = Some out; Json = true }
 
         Assert.Equal(ExitCode.Blocked, result.ExitCode)
         Assert.Equal("last known good", File.ReadAllText(Path.Combine(out, "index.html")))
@@ -72,7 +72,7 @@ module OutputTests =
         File.WriteAllText(Path.Combine(root, "content/good.md"), "---\nid: GOOD-1\n---\n")
         File.WriteAllText(Path.Combine(root, "tekmerion.config.json"), """{"schemaVersion":1,"repository":"example/research","include":["content/*.md"]}""")
 
-        let result = Commands.validate (aegis ()) { ConfigPath = Path.Combine(root, "tekmerion.config.json"); Root = None; Out = None; Forma = None; Json = true }
+        let result = Commands.validate (aegis ()) { IngestOptions.defaults with ConfigPath = Path.Combine(root, "tekmerion.config.json"); Json = true }
 
         Assert.Equal(ExitCode.Blocked, result.ExitCode)
         let corpus = result.Corpus.Value
@@ -102,6 +102,6 @@ module OutputTests =
     let ``invalid configuration is an argument error, not a crash`` () =
         let root = tempDirectory ()
         File.WriteAllText(Path.Combine(root, "tekmerion.config.json"), """{"schemaVersion":2}""")
-        let result = Commands.validate (aegis ()) { ConfigPath = Path.Combine(root, "tekmerion.config.json"); Root = None; Out = None; Forma = None; Json = true }
+        let result = Commands.validate (aegis ()) { IngestOptions.defaults with ConfigPath = Path.Combine(root, "tekmerion.config.json"); Json = true }
         Assert.Equal(ExitCode.InvalidArguments, result.ExitCode)
         Assert.NotEmpty result.Messages

@@ -102,7 +102,7 @@ module OperationalTests =
         write root "tekmerion.config.json" """{"schemaVersion":1,"repository":"example/adversarial","include":["content/**/*.md"],"frontier":{"records":"research/frontier/records/*.md"}}"""
         root
 
-    let run root out = Commands.ingest (aegis ()) { ConfigPath = Path.Combine(root, "tekmerion.config.json"); Root = None; Out = Some out; Forma = None; Json = true }
+    let run root out = Commands.ingest (aegis ()) { IngestOptions.defaults with ConfigPath = Path.Combine(root, "tekmerion.config.json"); Out = Some out; Json = true }
 
     [<Fact>]
     let ``TEK-TST-005 malformed, unknown, dangling, contradictory and cyclic input publish with warnings`` () =
@@ -149,3 +149,32 @@ module OperationalTests =
         Assert.False(File.Exists(Path.Combine(out, "partial.json")))
         Assert.False(Directory.Exists(Output.previousOf out))
         Assert.True(File.Exists(Path.Combine(out, "data/v1/manifest.json")))
+
+    let echelonTheme = Path.Combine(repositoryRoot, "node_modules", "@echelon-foundry", "echelon-theme", "dist")
+
+    [<Fact>]
+    let ``TEK-ECH-006 the pinned Echelon theme publishes with every url() it references`` () =
+        // The slice workflow's own flags; the theme is pinned in package.json
+        // and installed by `npm ci` before the suites run.
+        if File.Exists formaCss && Directory.Exists echelonTheme then
+            let out = Path.Combine(tempDirectory (), "site")
+
+            let options =
+                { options (Some out) with
+                    Forma = Some formaCss
+                    Theme = Some echelonTheme
+                    ThemeStylesheets = [ "echelon.css"; "echelon-fonts.css"; "echelon-app.css" ]
+                    Brand = Some "echelon" }
+
+            Assert.Equal(ExitCode.Success, (Commands.ingest (aegis ()) options).ExitCode)
+
+            let home = File.ReadAllText(Path.Combine(out, "index.html"))
+            Assert.Contains("<html lang=\"en\" data-forma-brand=\"echelon\">", home)
+            Assert.Contains("<link rel=\"stylesheet\" href=\"assets/forma/all.css\"><link rel=\"stylesheet\" href=\"assets/theme/echelon.css\"><link rel=\"stylesheet\" href=\"assets/theme/echelon-fonts.css\"><link rel=\"stylesheet\" href=\"assets/theme/echelon-app.css\">", home)
+
+            for css in options.ThemeStylesheets do
+                let stylesheet = Path.Combine(out, "assets", "theme", css)
+
+                for m in System.Text.RegularExpressions.Regex.Matches(File.ReadAllText stylesheet, "url\\(\"?([^\")]+)\"?\\)") do
+                    let target = Path.Combine(Path.GetDirectoryName stylesheet, m.Groups.[1].Value)
+                    Assert.True(File.Exists target, $"{css} references {m.Groups.[1].Value}, which was not published")

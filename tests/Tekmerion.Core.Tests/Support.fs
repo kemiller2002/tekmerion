@@ -34,11 +34,10 @@ module Support =
         { Aegis.configure "Tekmerion.Tests" None [ collector.Sink() ] with Persistence = PersistenceMode.Blocking }, collector
 
     let options out =
-        { ConfigPath = fixtureConfig
-          Root = None
-          Out = out
-          Forma = None
-          Json = true }
+        { IngestOptions.defaults with
+            ConfigPath = fixtureConfig
+            Out = out
+            Json = true }
 
     /// The golden corpus, ingested once through the real host path.
     let golden =

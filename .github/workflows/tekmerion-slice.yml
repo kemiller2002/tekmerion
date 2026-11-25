@@ -2,7 +2,9 @@ name: Tekmerion slice
 
 # Operational proof of the first vertical slice (GH-19): the real corpus
 # snapshot ingests, publishes deterministically, and navigates in a browser
-# with JavaScript disabled. Verification only; nothing is deployed.
+# with JavaScript disabled. Pages are styled with Forma and the Echelon theme
+# (TEK-ECH-006), both pinned in package.json. Verification only; nothing is
+# deployed.
 
 on:
   pull_request:
@@ -36,7 +38,10 @@ jobs:
             dotnet src/Tekmerion.Cli/bin/Release/net8.0/tekmerion.dll ingest \
               --config tests/fixtures/visual-engineering/tekmerion.config.json \
               --out .tmp/site-$n \
-              --forma node_modules/@echelon-foundry/design-system/dist/all.css --json
+              --forma node_modules/@echelon-foundry/design-system/dist/all.css \
+              --theme node_modules/@echelon-foundry/echelon-theme/dist \
+              --theme-css echelon.css --theme-css echelon-fonts.css --theme-css echelon-app.css \
+              --brand echelon --json
           done
 
       - name: Builds are byte-identical (TEK-ARC-004)

@@ -26,6 +26,30 @@ module FileSystem =
             |> Seq.filter (fun path -> not (path.StartsWith ".git/" || path = ".git"))
             |> Set.ofSeq)
 
+    /// Every regular file under a host-supplied asset directory (a theme's
+    /// `dist/`), as sorted '/'-separated relative paths. Symbolic links,
+    /// hidden and system entries are not followed or listed, so nothing
+    /// outside the directory can be copied into the publication.
+    let listAssets (config: AegisConfig) (directory: string) : Guarded<string list> =
+        let scope = Aegis.scope config "Tekmerion.Assets.List" (Map [ "directory", Public directory ])
+
+        Aegis.capture config scope (Faults.readAssets config) (fun () ->
+            let options =
+                EnumerationOptions(
+                    RecurseSubdirectories = true,
+                    AttributesToSkip = (FileAttributes.Hidden ||| FileAttributes.System ||| FileAttributes.ReparsePoint)
+                )
+
+            Directory.EnumerateFiles(directory, "*", options)
+            |> Seq.map (relative directory)
+            |> Seq.sortWith (fun a b -> String.CompareOrdinal(a, b))
+            |> List.ofSeq)
+
+    /// A host-supplied asset, copied byte for byte.
+    let readAsset (config: AegisConfig) (root: string) (path: string) : Guarded<byte array> =
+        let scope = Aegis.scope config "Tekmerion.Assets.Read" (Map [ "path", Public path ])
+        Aegis.capture config scope (Faults.readAssets config) (fun () -> File.ReadAllBytes(Path.Combine(root, path)))
+
     /// The I/O boundary: bytes or a fault.
     let readBytes (config: AegisConfig) (root: string) (path: string) : Guarded<byte array> =
         let scope = Aegis.scope config "Tekmerion.Source.Read" (Map [ "path", Public path ])

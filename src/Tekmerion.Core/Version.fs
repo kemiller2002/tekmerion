@@ -4,7 +4,7 @@ namespace Tekmerion.Core
 module Version =
 
     [<Literal>]
-    let Tekmerion = "0.1.0-dev"
+    let Tekmerion = "0.2.0-dev"
 
     /// Major version of the `/data/v1/` machine-readable contracts.
     [<Literal>]

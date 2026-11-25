@@ -21,7 +21,8 @@ module SiteTests =
 
     let options =
         { Title = "Visual Engineering Research"
-          FormaStylesheet = Some "assets/forma/all.css"
+          Stylesheets = [ "assets/forma/all.css" ]
+          Brand = None
           SourceLink = fun l -> l.Commit |> Option.map (fun c -> $"https://github.com/kemiller2002/visual-engineering/blob/{c}/{RepoPath.value l.Path}")
           LegacyUrls = legacy.Force() }
 
@@ -164,3 +165,41 @@ module SiteTests =
         Assert.DoesNotContain("javascript:", html.Text)
         Assert.Contains("&lt;script&gt;", html.Text)
         Assert.Contains("href=\"https://example.org\" rel=\"noopener noreferrer\"", html.Text)
+
+    [<Fact>]
+    let ``TEK-ECH-006 the Echelon theme links after Forma and brands every page`` () =
+        let themed =
+            { options with
+                Stylesheets = [ "assets/forma/all.css"; "assets/theme/echelon.css"; "assets/theme/echelon-fonts.css"; "assets/theme/echelon-app.css" ]
+                Brand = Some "echelon" }
+
+        // Legacy redirect stubs stay bare: they only move the reader on.
+        let laidOut =
+            fst (Site.render (golden.Force()) themed)
+            |> List.filter (fun page -> not (page.Text.Contains "http-equiv=\"refresh\""))
+
+        Assert.NotEmpty laidOut
+
+        for page in laidOut do
+            Assert.Contains("<html lang=\"en\" data-forma-brand=\"echelon\">", page.Text)
+
+            let links =
+                Regex.Matches(page.Text, "<link rel=\"stylesheet\" href=\"([^\"]*)\">")
+                |> Seq.map (fun m -> resolve page.Path m.Groups.[1].Value)
+                |> List.ofSeq
+
+            Assert.Equal<string list>(themed.Stylesheets, links)
+
+    [<Fact>]
+    let ``TEK-ECH-003 a brand and theme change presentation only, never content`` () =
+        let themed =
+            { options with
+                Stylesheets = options.Stylesheets @ [ "assets/theme/echelon.css" ]
+                Brand = Some "echelon" }
+
+        let strip (html: string) =
+            Regex.Replace(Regex.Replace(html, "<link rel=\"stylesheet\"[^>]*>", ""), " data-forma-brand=\"echelon\"", "")
+
+        let plain = fst (Site.render (golden.Force()) options) |> List.map (fun f -> f.Path, strip f.Text)
+        let branded = fst (Site.render (golden.Force()) themed) |> List.map (fun f -> f.Path, strip f.Text)
+        Assert.Equal<(string * string) list>(plain, branded)
