@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-11-25T13:02:05.000Z",
+  "updatedAt": "2026-11-25T15:26:50.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -513,6 +513,17 @@
       "blockReason": "Waiting on Aegis 2.0.1: Aegis 2.0.0 requires FSharp.Core >= 11.0.101, causing NU1605 restore failure",
       "completedAt": "2026-11-25T13:02:05.000Z",
       "conclusion": "Aegis.Core pinned at 2.0.1; restore resolves FSharp.Core 10.1.400; builds clean on SDK 10 and 11; 289 tests pass"
+    },
+    {
+      "id": "WI-0024",
+      "type": "task",
+      "state": "active",
+      "semanticState": "active",
+      "evidence": [],
+      "updatedAt": "2026-11-25T15:26:50.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261125T152650904Z-30f2ddae"
+      ]
     }
   ]
 }

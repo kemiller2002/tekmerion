@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "repository": "research-publisher",
-  "nextSeq": 24,
+  "nextSeq": 25,
   "items": [
     {
       "id": "WI-0001",
@@ -398,6 +398,27 @@
       "attachments": [],
       "createdAt": "2026-11-25T12:23:38.970Z",
       "updatedAt": "2026-11-25T13:02:05.000Z",
+      "createdBy": "unknown",
+      "createdByActor": {
+        "kind": "agent",
+        "id": "anthropic/claude-code",
+        "provider": "anthropic",
+        "model": "unknown",
+        "runtime": "claude-code"
+      },
+      "source": "manual",
+      "sourceReference": null
+    },
+    {
+      "id": "WI-0024",
+      "title": "Pin the Playwright slice job to ubuntu-24.04 (Playwright 1.56.1 has no ubuntu 26.04 support)",
+      "description": null,
+      "tags": [],
+      "priority": "medium",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-11-25T15:26:46.587Z",
+      "updatedAt": "2026-11-25T15:26:50.000Z",
       "createdBy": "unknown",
       "createdByActor": {
         "kind": "agent",
