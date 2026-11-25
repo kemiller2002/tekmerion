@@ -34,4 +34,4 @@
 | WI-0021 | Move tekmerion to Praxis 3.7.2, Ordo 1.4.2, Visual Engineering 1.0.1 and adopt Conditor | complete |  | medium |
 | WI-0022 | Move tekmerion to Ordo 1.5.0 via echelon-current 1.2.0 (conditor upgrade --current) | complete |  | medium |
 | WI-0023 | Upgrade Aegis 1.0.0 -> 2.0.0 (echelon-current 1.40.0) | complete |  | medium |
-| WI-0024 | Pin the Playwright slice job to ubuntu-24.04 (Playwright 1.56.1 has no ubuntu 26.04 support) | ready |  | medium |
+| WI-0024 | Pin the Playwright slice job to ubuntu-24.04 (Playwright 1.56.1 has no ubuntu 26.04 support) | complete |  | medium |
