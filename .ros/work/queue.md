@@ -38,3 +38,4 @@
 | WI-0025 | Move Aegis 2.0.1 pins to 2.0.2 (WebAssembly detached-capture hang fix) | complete |  | medium |
 | WI-0026 | Upgrade to echelon-current 1.42.0 (Praxis 3.25.0, Ordo 1.20.0, Forma 1.0.1, Limen 0.9.1) | complete |  | medium |
 | WI-0027 | Echelon theme support in tekmerion ingest (--theme/--theme-css/--brand) and adopt echelon-theme 1.1.0 in the slice; minor release 0.2.0 | complete |  | medium |
+| WI-0028 | Upgrade to echelon-current 1.43.0 (Praxis 3.26.0) | complete |  | medium |
