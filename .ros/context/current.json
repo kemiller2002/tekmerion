@@ -4,7 +4,7 @@
   "repository": "research-publisher",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-17T10:37:23.499Z",
-  "updatedAt": "2026-11-26T00:48:47Z",
+  "updatedAt": "2026-11-26T00:56:02Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -693,13 +693,43 @@
     {
       "id": "WI-0028",
       "type": "task",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-11-26T00:48:47Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".conditor/lock.json"
+        },
+        {
+          "type": "tests",
+          "path": ".echelon/toolchain.json"
+        }
+      ],
+      "updatedAt": "2026-11-26T00:56:02Z",
       "telemetryExecutionIds": [
         "EXE-20261126T004848919Z-848768a0"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "40b9da029933a25571a0a289",
+        "recordedAt": "2026-11-26T00:56:00Z",
+        "executionId": "EXE-20261126T004848919Z-848768a0",
+        "repository": "research-publisher",
+        "branch": "claude/vigila-implementation-jdeps1",
+        "commit": "9d6709b63ebc25fe8ddaa61dc0edfafdcfa60c01",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/tekmerion"
+        },
+        "remoteBranch": "claude/vigila-implementation-jdeps1",
+        "remoteCommit": "9d6709b63ebc25fe8ddaa61dc0edfafdcfa60c01",
+        "summary": "echelon-current 1.43.0 upgrade committed and pushed; local builds and tests pass",
+        "nextAction": "Complete the work item, open a draft PR and watch CI",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-26T00:56:02Z"
     }
   ]
 }
